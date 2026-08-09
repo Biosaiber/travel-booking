@@ -1,59 +1,90 @@
-# TravelBooking
+ 🧠 Univerzálny Angular štartovací algoritmus
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.7.
+Toto si pokojne zapíš niekam bokom. Toto budeme trénovať stále:
 
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
+```
+1. ČO MÁ APLIKÁCIA ROBIŤ?
+        ↓
+2. AKÝ JE USER FLOW?
+        ↓
+3. AKÉ DÁTOVÉ OBJEKTY EXISTUJÚ?
+        ↓
+4. AKÉ INTERFACES POTREBUJEM?
+        ↓
+5. KTORÉ DÁTA SÚ ZDIEĽANÉ?
+        ↓
+6. POTREBUJEM SERVICE?
+        ↓
+7. AKÉ OBRAZOVKY / COMPONENTS POTREBUJEM?
+        ↓
+8. AKÉ ROUTES POTREBUJEM?
+        ↓
+9. ČO JE ZODPOVEDNOSŤ KAŽDÉHO COMPONENTU?
+        ↓
+10. AKÉ FORMS POTREBUJEM?
+        ↓
+11. AKÉ VALIDÁCIE POTREBUJEM?
+        ↓
+12. AKO DÁTA TEČÚ CELOU APLIKÁCIOU?
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🎯 Pre mňa ideálne štruktúra Angular učenia
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+Programming/
+│
+├── Angular/
+│   │
+│   ├── 01-typescript/
+│   ├── 02-angular-basics/
+│   ├── 03-components/
+│   ├── 04-services/
+│   ├── 05-routing/
+│   ├── 06-forms/
+│   │      └── travel-booking/
+│   ├── 07-signals/
+│   ├── 08-rxjs/
+│   └── 09-final-project/
+│
+├── JavaScript/
+├── NodeJS/
+└── React/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+```
+mkdir directory-name
+toutch new-empty-file-name
+cd projekt-name
 
-```bash
-ng generate --help
+1. ng new projekt-name
+2. cd projekt-name
+3. code . && ng serve -o
+
+4. git status
+5. gh repo create project-name --public --source=. --remoteorigin --push
+6. git remote -v
+7. git checkout -b feature/project-name
+
+ng g c component-name --standalone ---skip-tests
+ng g s service-name
+ng g d directive-name
+ng g p pipe-name
+
+git status
+git add .
+git commit -m "feat: booking-service implemented"
+git push
+
 ```
 
-## Building
+Type commitie messages
 
-To build the project run:
-
-```bash
-ng build
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+"feat: nová funkcionalita"
+"fix: oprava chyby"
+"refactor: zmena kódu, bez zmeny správania"
+"style: vzhľad, CSS"
+"chore: setup, comfing"
+"docs: dokumenty, README"
+"assets: obr"
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
