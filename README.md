@@ -1,4 +1,26 @@
- 🧠 Univerzálny Angular štartovací algoritmus
+## 01DAY
+Perfektné. 👍 Máme pripravené všetko, čo sme potrebovali:
+
+✅ Angular projekt vytvorený  
+✅ GitHub repository funguje  
+✅ `main` branch pripravený  
+✅ `feature/travel-booking` branch vytvorený a pushnutý  
+✅ Máme hotový referenčný projekt, ku ktorému sa môžeme vracať počas učenia.
+
+Zajtra už nebudeme riešiť žiadne technické nastavenia. Hneď začneme ako vo firme.
+
+Plán bude približne takýto:
+
+1. **Business analýza**: Čo má aplikácia robiť?
+2. **User flow**: Ako sa používateľ pohybuje aplikáciou?
+3. **Návrh dátových modelov**: `Flight`, `Hotel`, `BookingDetails`.
+4. **Rozhodnutie, prečo potrebujeme `BookingService`.**
+5. **Rozdelenie na komponenty a routy.**
+6. Až potom začneme písať prvý kód.
+
+ 
+
+🧠 Univerzálny Angular štartovací algoritmus
 
 Toto si pokojne zapíš niekam bokom. Toto budeme trénovať stále:
 
@@ -73,6 +95,7 @@ ng g p pipe-name
 git status
 git add .
 git commit -m "feat: booking-service implemented"
+git push --set-upstream origin feature/project-name
 git push
 
 ```
