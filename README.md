@@ -61,11 +61,11 @@ cd projekt-name
 3. code . && ng serve -o
 
 4. git status
-5. gh repo create project-name --public --source=. --remoteorigin --push
+5. gh repo create project-name --public --source=. --remote=origin --push
 6. git remote -v
 7. git checkout -b feature/project-name
 
-ng g c component-name --standalone ---skip-tests
+ng g c component-name --standalone --skip-tests
 ng g s service-name
 ng g d directive-name
 ng g p pipe-name
@@ -86,5 +86,5 @@ Type commitie messages
 "style: vzhľad, CSS"
 "chore: setup, comfing"
 "docs: dokumenty, README"
-"assets: obr"
+"assets: obrázky a fonty"
 ```
