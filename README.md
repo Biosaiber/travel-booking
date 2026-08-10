@@ -1,24 +1,213 @@
-## 01DAY
-Perfektné. 👍 Máme pripravené všetko, čo sme potrebovali:
+## Angular Project Architecture
 
-✅ Angular projekt vytvorený  
-✅ GitHub repository funguje  
-✅ `main` branch pripravený  
-✅ `feature/travel-booking` branch vytvorený a pushnutý  
-✅ Máme hotový referenčný projekt, ku ktorému sa môžeme vracať počas učenia.
+1. Business analýza
+2. User Flow
+3. Návrh dátových modelov (Interfaces)
+4. Návrh Services
+5. Rozdelenie na Components
+6. Návrh Routingu
+7. Implementácia
+8. Validácie
+9. Testovanie
 
-Zajtra už nebudeme riešiť žiadne technické nastavenia. Hneď začneme ako vo firme.
+### 1. Business analýza
 
-Plán bude približne takýto:
+> Analýza nám hovorí, **čo sa má diať**.
 
-1. **Business analýza**: Čo má aplikácia robiť?
-2. **User flow**: Ako sa používateľ pohybuje aplikáciou?
-3. **Návrh dátových modelov**: `Flight`, `Hotel`, `BookingDetails`.
-4. **Rozhodnutie, prečo potrebujeme `BookingService`.**
-5. **Rozdelenie na komponenty a routy.**
-6. Až potom začneme písať prvý kód.
+1. Používateľ vyberie krajinu odletu a cieľovú krajinu.
+2. Aplikácia mu zobrazí dostupné lety pre zvolenú trasu.
+3. Používateľ vyberie let a zadá potrebné údaje o cestujúcom a ceste.
+4. Aplikácia mu zobrazí hotely dostupné v cieľovej krajine.
+5. Používateľ vyberie hotel a zadá kontaktné údaje
+   a informácie o pobyte.
+6. Aplikácia skontroluje, či sú zadané údaje platné
+   a vypočíta cenu rezervácie.
+7. Používateľ dostane súhrn celej rezervácie.
 
- 
+### 2. User flow
+
+> Akými obrazovkami a krokmi používateľ prejde?
+
+```
+START
+   ↓
+Home
+
+APP:
+- zobrazí formulár (From, To)
+
+USER:
+- vyberie krajiny
+
+Submit
+   ↓
+Valid?
+├── NO
+│
+│   APP:
+│   - zobrazí validačné chyby
+│   - zostane na Home
+│
+└── YES
+    │
+    APP:
+    - update BookingDetails
+    - navigate na Flight Booking
+```
+
+```
+Flight Booking
+
+APP:
+- načíta dostupné lety
+- zobrazí formulár
+
+USER:
+- vyberie let
+- zadá meno
+- počet cestujúcich
+- dátumy
+
+Submit
+   ↓
+Valid?
+├── NO
+│
+│   APP:
+│   - zobrazí chyby
+│
+└── YES
+    │
+    APP:
+    - update BookingDetails
+    - navigate na Hotel Booking
+```
+
+```
+Hotel Booking
+
+APP:
+- načíta hotely
+- zobrazí formulár
+
+USER:
+- vyberie hotel
+- email
+- telefón
+- dni
+- izby
+
+Submit
+   ↓
+Valid?
+├── NO
+│
+│   APP:
+│   - zobrazí chyby
+│
+└── YES
+    │
+    APP:
+    - update BookingDetails
+    - navigate na Summary
+```
+
+```
+Summary
+
+APP:
+- načíta BookingDetails
+- zobrazí celú rezerváciu
+```
+
+### Service flows
+
+```
+Home
+   │
+   ▼
+BookingService
+   │
+updateBookingDetails(...)
+   │
+   ▼
+BookingDetails
+```
+
+```
+Flight Booking
+        │
+        ▼
+BookingService
+        │
+        ▼
+BookingDetails
+```
+
+```
+Hotel Booking
+        │
+        ▼
+BookingService
+        │
+        ▼
+BookingDetails
+```
+
+## 3. Návrh dátových modelov
+
+#### Flight
+
+```typescript
+export interface Flight {
+  id: string;
+  details: string;
+  price: number;
+  fromCountry: string;
+  toCountry: string;
+}
+```
+
+#### Hotel
+
+```typescript
+export interface Hotel {
+  id: string;
+  name: string;
+  country: string;
+  price: number;
+  roomsAvailable: number;
+}
+```
+
+#### BookingDetails
+
+```typescript
+interface BookingDetails {
+  flight?: Flight;
+  hotel?: Hotel;
+
+  customerName?: string; // customerName: string | undefined;
+  email?: string; // "Táto property nemusí existovať."
+  phone?: string;
+
+  departureDate?: Date;
+  arrivalDate?: Date;
+
+  travelers?: number;
+
+  days?: number;
+  rooms?: number;
+
+  totalCost?: number;
+}
+```
+
+## **4. Návrh Services a architektúra aplikácie**
+
+Services, State Management, Komunikácia medzi komponentmi
+
+##  
 
 🧠 Univerzálny Angular štartovací algoritmus
 
