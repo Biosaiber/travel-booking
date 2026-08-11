@@ -1,30 +1,28 @@
-## Angular Project Architecture
+# Travel-booking app design
 
-1. Business analýza
-2. User Flow
-3. Návrh dátových modelov (Interfaces)
-4. Návrh Services
-5. Rozdelenie na Components
-6. Návrh Routingu
-7. Implementácia
-8. Validácie
-9. Testovanie
-
-### 1. Business analýza
+1. 🔍 Business Analysis
 
 > Analýza nám hovorí, **čo sa má diať**.
 
+```
 1. Používateľ vyberie krajinu odletu a cieľovú krajinu.
+
 2. Aplikácia mu zobrazí dostupné lety pre zvolenú trasu.
+
 3. Používateľ vyberie let a zadá potrebné údaje o cestujúcom a ceste.
+
 4. Aplikácia mu zobrazí hotely dostupné v cieľovej krajine.
+
 5. Používateľ vyberie hotel a zadá kontaktné údaje
    a informácie o pobyte.
+
 6. Aplikácia skontroluje, či sú zadané údaje platné
    a vypočíta cenu rezervácie.
-7. Používateľ dostane súhrn celej rezervácie.
 
-### 2. User flow
+7. Používateľ dostane súhrn celej rezervácie.
+```
+
+## 2. 🧭 User flow
 
 > Akými obrazovkami a krokmi používateľ prejde?
 
@@ -94,7 +92,6 @@ USER:
 - vyberie hotel
 - email
 - telefón
-- dni
 - izby
 
 Submit
@@ -120,43 +117,64 @@ APP:
 - zobrazí celú rezerváciu
 ```
 
-### Service flows
+##### Service flows
 
 ```
-Home
-   │
-   ▼
+HomeComponent
+      │
+      │ updateBookingDetails(fromCountry, toCountry)
+      ▼
 BookingService
-   │
-updateBookingDetails(...)
-   │
-   ▼
+      │
+      ▼
 BookingDetails
 ```
 
 ```
-Flight Booking
-        │
-        ▼
-BookingService
-        │
-        ▼
-BookingDetails
+FlightBookingComponent
+      │
+      ├── getBookingDetails()
+      │        ↓
+      │   fromCountry, toCountry
+      │
+      ├── getFlights(fromCountry, toCountry)
+      │        ↓
+      │   availableFlights
+      │
+      └── updateBookingDetails(...)
+               ↓
+         BookingDetails
 ```
 
 ```
-Hotel Booking
-        │
-        ▼
-BookingService
-        │
-        ▼
-BookingDetails
+HotelBookingComponent
+      │
+      ├── getBookingDetails()
+      │        ↓
+      │     toCountry
+      │
+      ├── getHotels(toCountry)
+      │        ↓
+      │   availableHotels
+      │
+      └── updateBookingDetails(...)
+               ↓
+         BookingDetails
 ```
 
-## 3. Návrh dátových modelov
+```
+SummaryComponent
+      │
+      └── getBookingDetails()
+               ↓
+         BookingDetails
+               ↓
+        zobrazenie rezervácie
+```
 
-#### Flight
+## 3. 📦 Data Models
+
+#### Flight
 
 ```typescript
 export interface Flight {
@@ -168,7 +186,7 @@ export interface Flight {
 }
 ```
 
-#### Hotel
+#### Hotel
 
 ```typescript
 export interface Hotel {
@@ -180,123 +198,210 @@ export interface Hotel {
 }
 ```
 
-#### BookingDetails
+#### BookingDetails
 
 ```typescript
-interface BookingDetails {
-  flight?: Flight;
-  hotel?: Hotel;
+export interface BookingDetails {
+    flight?: Flight;
+    hotel?: Hotel;
 
-  customerName?: string; // customerName: string | undefined;
-  email?: string; // "Táto property nemusí existovať."
-  phone?: string;
+    customerName?: string; // customerName: string | undefined;
+    email?: string; // "Táto property nemusí existovať."
+    phone?: string;
 
-  departureDate?: Date;
-  arrivalDate?: Date;
+    departureDate?: Date;
+    arrivalDate?: Date;
 
-  travelers?: number;
+    travelers?: number;
 
-  days?: number;
-  rooms?: number;
+    rooms?: number;
 
-  totalCost?: number;
+    totalCost?: number;
 }
 ```
 
-## **4. Návrh Services a architektúra aplikácie**
+## **4. ⚙️ Services & State Management**
 
-Services, State Management, Komunikácia medzi komponentmi
-
-##  
-
-🧠 Univerzálny Angular štartovací algoritmus
-
-Toto si pokojne zapíš niekam bokom. Toto budeme trénovať stále:
+#### booking.service.ts
 
 ```
-1. ČO MÁ APLIKÁCIA ROBIŤ?
-        ↓
-2. AKÝ JE USER FLOW?
-        ↓
-3. AKÉ DÁTOVÉ OBJEKTY EXISTUJÚ?
-        ↓
-4. AKÉ INTERFACES POTREBUJEM?
-        ↓
-5. KTORÉ DÁTA SÚ ZDIEĽANÉ?
-        ↓
-6. POTREBUJEM SERVICE?
-        ↓
-7. AKÉ OBRAZOVKY / COMPONENTS POTREBUJEM?
-        ↓
-8. AKÉ ROUTES POTREBUJEM?
-        ↓
-9. ČO JE ZODPOVEDNOSŤ KAŽDÉHO COMPONENTU?
-        ↓
-10. AKÉ FORMS POTREBUJEM?
-        ↓
-11. AKÉ VALIDÁCIE POTREBUJEM?
-        ↓
-12. AKO DÁTA TEČÚ CELOU APLIKÁCIOU?
+Zodpovednosť
+- spravuje stav rezervácie
+
+Dáta
+- Flight[]
+- Hotel[]
+- bookingDetails: BookingDetails
+
+Metódy
+- getCountries()
+- getFlights()
+- getHotels()
+- updateBookingDetails()
+- getBookingDetails()
+- clearBookingDetails()
+
+Používajú
+- HomeComponent
+- FlightBookingComponent
+- HotelBookingComponent
+- SummaryComponent
 ```
 
-## 🎯 Pre mňa ideálne štruktúra Angular učenia
+#### log-error.service.ts
 
 ```
-Programming/
-│
-├── Angular/
-│   │
-│   ├── 01-typescript/
-│   ├── 02-angular-basics/
-│   ├── 03-components/
-│   ├── 04-services/
-│   ├── 05-routing/
-│   ├── 06-forms/
-│   │      └── travel-booking/
-│   ├── 07-signals/
-│   ├── 08-rxjs/
-│   └── 09-final-project/
-│
-├── JavaScript/
-├── NodeJS/
-└── React/
-```
+Zodpovednosť
+- spravuje chyby z formulárov
 
-```
-mkdir directory-name
-toutch new-empty-file-name
-cd projekt-name
+Dáta
+- errors: string[]
 
-1. ng new projekt-name
-2. cd projekt-name
-3. code . && ng serve -o
+Metódy
+- addError()
+- getErrors()
+- clearErrors()
 
-4. git status
-5. gh repo create project-name --public --source=. --remote=origin --push
-6. git remote -v
-7. git checkout -b feature/project-name
-
-ng g c component-name --standalone --skip-tests
-ng g s service-name
-ng g d directive-name
-ng g p pipe-name
-
-git status
-git add .
-git commit -m "feat: booking-service implemented"
-git push --set-upstream origin feature/project-name
-git push
+Používajú
+- FlightBookingComponent
+- HotelBookingComponent
 
 ```
 
-Type commitie messages
+## 5. 🧩 Components
+
+#### HomeComponent
 
 ```
-"feat: nová funkcionalita"
-"fix: oprava chyby"
-"refactor: zmena kódu, bez zmeny správania"
-"style: vzhľad, CSS"
-"chore: setup, comfing"
-"docs: dokumenty, README"
-"assets: obrázky a fonty"
+Zodpovednosť
+- začiatok rezervácie
+- výber krajiny odletu a destinácie
+- validácia úvodného formulára
+- uloženie fromCountry a toCountry do rezervácie
+
+Dáta
+- countries: string[]
+- travelModel (fromCountry, toCountry)
+
+Metódy
+- ngOnInit()
+- onSubmit() / startBooking()
+- isFieldInvalid()
+
+Services
+
+BookingService
+- getCountries()
+- updateBookingDetails()
+
+Naviguje na
+- FlightBookingComponent
+```
+
+#### FlightBookingComponent
+
+```
+Zodpovednosť
+- zobraziť dostupné lety podľa fromCountry a toCountry z rezervácie
+- umožniť výber letu, mena, počtu cestujúcich a dátumov
+- zobraziť chyby pri validácii formulára
+
+Dáta
+- availableFlights: Flight[]
+- flightForm / údaje z formulára
+
+Metódy
+- ngOnInit()
+- onSubmit()
+- handleErrors()
+
+Services
+
+BookingService
+- getBookingDetails()
+- getFlights(fromCountry, toCountry)
+- updateBookingDetails()
+
+LogErrorService
+- addError()
+- getErrors()
+- clearErrors()
+
+Naviguje na
+- HotelBookingComponent
+```
+
+#### HotelBookingComponent
+
+#### SummaryComponent
+
+```
+Zodpovednosť
+- zobraziť celú rezerváciu
+
+Dáta
+- bookingDetails: BookingDetails
+
+Metódy
+- ngOnInit()
+
+Services
+
+BookingService
+- getBookingDetails()
+
+```
+
+## 6. 🛣️ Routing
+
+```
+Default route
+- path: ''
+- redirectTo: 'home'
+- pathMatch: 'full'
+
+Main routes
+- Route 1
+  path: home
+  component: HomeComponent
+  prichádza z: štart aplikácie
+  pokračuje na: flight-booking
+
+- Route 2
+  path: flight-booking
+  component: FlightBookingComponent
+  prichádza z: home
+  pokračuje na: hotel-booking
+
+- Route 3
+  path: hotel-booking
+  component: HotelBookingComponent
+  prichádza z: flight-booking
+  pokračuje na: summary
+
+- Route 4
+  path: summary
+  component: SummaryComponent
+  prichádza z: hotel-booking
+  pokračuje na: nikde
+
+Navigation flow
+
+home
+↓
+flight-booking
+↓
+hotel-booking
+↓
+summary
+
+Fallback route
+- path: '**'
+- redirectTo: 'home'
+
+Optional
+- route params? : no
+- query params? : no
+- child routes? : no
+- guards? : no
 ```
