@@ -1,6 +1,8 @@
 export interface Flight {
     id: string;
-    details: string;
+    airline: string;
+    travelClass: string;
+    departureTime: string;
     price: number;
     fromCountry: string;
     toCountry: string;
