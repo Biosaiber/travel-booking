@@ -164,4 +164,22 @@ export class BookingService {
     return this.countries;
   }
 
+
+
+
+
+  getFlights() {
+/* tu som skoncil      
+1. musim napisat metodu ktora prelistuje lety a vrati len tiek ktore sa zhoduju z travelModelu formy
+2. mozeme kludne aj toto preskocit a mozeme si zatial spravit homecomponent a uy vidiet select pre getCountries, 
+respektive otestovat uz data a metody
+    for (const flight in this.flights) {
+      if (this.travelModel.fromCountry === )
+    } */
+  }
+  getHotels() { }
+  updateBookingDetails() { }
+  getBookingDetails() { }
+  clearBookingDetails() { }
+
 }
