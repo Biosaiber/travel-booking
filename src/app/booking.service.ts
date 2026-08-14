@@ -191,7 +191,11 @@ export class BookingService {
       ...details
     }
   }
-  getBookingDetails() { }
-  clearBookingDetails() { }
+  getBookingDetails() {
+    return this.bookingDetails;
+  }
+  clearBookingDetails() {
+    this.bookingDetails = {}
+  }
 
 }
