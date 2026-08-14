@@ -8,8 +8,8 @@ import { Hotel } from './models/hotel.interface';
   providedIn: 'root',
 })
 export class BookingService {
-  bookingDetails: BookingDetails = {};
-  flights: Flight[] = [
+  private bookingDetails: BookingDetails = {};
+  private flights: Flight[] = [
     {
       id: "FL001",
       airline: "KLM",
@@ -67,7 +67,7 @@ export class BookingService {
       toCountry: "United Kingdom"
     }
   ];
-  hotels: Hotel[] = [
+  private hotels: Hotel[] = [
     {
       id: "HT001",
       name: "Berlin Central Hotel",
@@ -150,7 +150,7 @@ export class BookingService {
     }
   ];
 
-  getCountries() {
+  getCountries(): string[] {
     const countries: string[] = [];
     for (const flight of this.flights) {
 
@@ -165,7 +165,7 @@ export class BookingService {
     return countries;
   }
 
-  getFlights(fromCountry: string, toCountry: string) {
+  getFlights(fromCountry: string, toCountry: string): Flight[] {
     const availableFlights: Flight[] = [];
     for (const flight of this.flights) {
       if (fromCountry === flight.fromCountry && toCountry === flight.toCountry) {
@@ -175,7 +175,7 @@ export class BookingService {
     return availableFlights;
   }
 
-  getHotels(toCountry: string) {
+  getHotels(toCountry: string): Hotel[] {
     const availableHotels: Hotel[] = [];
     for (const hotel of this.hotels) {
       if (toCountry === hotel.country) {
@@ -185,17 +185,17 @@ export class BookingService {
     return availableHotels;
   }
 
-  updateBookingDetails(details: Partial<BookingDetails>) {
+  updateBookingDetails(details: Partial<BookingDetails>): void {
     this.bookingDetails = {
       ...this.bookingDetails,
       ...details
-    }
+    };
   }
-  getBookingDetails() {
+  getBookingDetails(): BookingDetails {
     return this.bookingDetails;
   }
-  clearBookingDetails() {
-    this.bookingDetails = {}
+  clearBookingDetails(): void {
+    this.bookingDetails = {};
   }
 
 }
