@@ -178,14 +178,19 @@ export class BookingService {
   getHotels(toCountry: string) {
     const availableHotels: Hotel[] = [];
     for (const hotel of this.hotels) {
-      if ( toCountry === hotel.country) {
+      if (toCountry === hotel.country) {
         availableHotels.push(hotel);
       }
     }
     return availableHotels;
   }
 
-  updateBookingDetails() { }
+  updateBookingDetails(details: Partial<BookingDetails>) {
+    this.bookingDetails = {
+      ...this.bookingDetails,
+      ...details
+    }
+  }
   getBookingDetails() { }
   clearBookingDetails() { }
 
