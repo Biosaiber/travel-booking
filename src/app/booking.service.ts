@@ -3,12 +3,12 @@ import { BookingDetails } from './models/booking.interface';
 import { Flight } from './models/flight.interface';
 import { Hotel } from './models/hotel.interface';
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class BookingService {
   bookingDetails: BookingDetails = {};
-  countries: string[] = [];
   flights: Flight[] = [
     {
       id: "FL001",
@@ -151,33 +151,34 @@ export class BookingService {
   ];
 
   getCountries() {
+    const countries: string[] = [];
     for (const flight of this.flights) {
 
-      if (!this.countries.includes(flight.fromCountry)) {
-        this.countries.push(flight.fromCountry);
+      if (!countries.includes(flight.fromCountry)) {
+        countries.push(flight.fromCountry);
       }
 
-      if (!this.countries.includes(flight.toCountry)) {
-        this.countries.push(flight.toCountry);
+      if (!countries.includes(flight.toCountry)) {
+        countries.push(flight.toCountry);
       }
     }
-    return this.countries;
+    return countries;
   }
 
-
-
-
-
-  getFlights() {
-/* tu som skoncil      
-1. musim napisat metodu ktora prelistuje lety a vrati len tiek ktore sa zhoduju z travelModelu formy
-2. mozeme kludne aj toto preskocit a mozeme si zatial spravit homecomponent a uy vidiet select pre getCountries, 
-respektive otestovat uz data a metody
-    for (const flight in this.flights) {
-      if (this.travelModel.fromCountry === )
-    } */
+  getFlights(fromCountry: string, toCountry: string) {
+    const availableFlights: Flight[] = [];
+    for (const flight of this.flights) {
+      if (fromCountry === flight.fromCountry && toCountry === flight.toCountry) {
+        availableFlights.push(flight);
+      }
+    }
+    return availableFlights;
   }
-  getHotels() { }
+
+  getHotels() {
+    
+  }
+
   updateBookingDetails() { }
   getBookingDetails() { }
   clearBookingDetails() { }
