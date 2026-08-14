@@ -1,1 +1,25 @@
-<p>home works!</p>
+<form>
+    <div>
+        <label for="flight-from">
+            Flight from:
+        </label>
+        <select name="flight-from" id="flight-from">
+            @for (country of this.countries; track country) {
+            <option value="{{country}}">{{country}}</option>
+            }
+
+        </select>
+    </div>
+    <div>
+        <label for="flight-to">
+            Flight to:
+        </label>
+        <select name="flight-to" id="flight-to">
+            @for (country of this.countries; track country) {
+            <option value="{{country}}">{{country}}</option>
+            }
+
+        </select>
+    </div>
+    <button type="submit" [disabled]="true">Find flights</button>
+</form>

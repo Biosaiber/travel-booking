@@ -229,17 +229,17 @@ Zodpovednosť
 - spravuje stav rezervácie
 
 Dáta
-- Flight[]
-- Hotel[]
-- bookingDetails: BookingDetails
+- Flight[] ✓
+- Hotel[] ✓
+- bookingDetails: BookingDetails ✓
 
 Metódy
-- getCountries()
-- getFlights()
-- getHotels()
-- updateBookingDetails()
-- getBookingDetails()
-- clearBookingDetails()
+- getCountries() ✓
+- getFlights() ✓
+- getHotels() ✓
+- updateBookingDetails() ✓
+- getBookingDetails() ✓
+- clearBookingDetails() ✓
 
 Používajú
 - HomeComponent
