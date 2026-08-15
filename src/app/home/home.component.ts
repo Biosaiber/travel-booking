@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BookingService, TravelSelection } from '../booking.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 
@@ -15,6 +16,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class HomeComponent implements OnInit {
   countries: string[] = [];
   bookingService = inject(BookingService);
+  router = inject(Router);
   travelFormModel: TravelSelection = {
     fromCountry: "",
     toCountry: ""
@@ -33,6 +35,8 @@ export class HomeComponent implements OnInit {
 
     
     // redirect to flight-booking.component
+    this.router.navigate(['/flight-booking']);
+
     // if no message handler error method
   }
 
