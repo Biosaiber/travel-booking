@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BookingService, TravelSelection } from '../booking.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 
 
@@ -23,8 +23,17 @@ export class HomeComponent implements OnInit {
     this.countries = this.bookingService.getCountries();
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    // validation
+    // if valid
+    if (form.valid) {
+          // update travelSelection
+      this.bookingService.updateTravelSelection(this.travelFormModel);
+    }
 
+    
+    // redirect to flight-booking.component
+    // if no message handler error method
   }
 
 }
