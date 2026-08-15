@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BookingService } from '../booking.service';
+import { FormsModule } from '@angular/forms';
 
 interface TravelModel {
   fromCountry: string;
@@ -8,7 +9,7 @@ interface TravelModel {
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -23,6 +24,10 @@ export class HomeComponent implements OnInit {
   };
   ngOnInit(): void {
     this.countries = this.bookingService.getCountries();
+  }
+
+  onSubmit() {
+    
   }
 
 }
