@@ -29,13 +29,14 @@ export class HomeComponent implements OnInit {
     // validation
     // if valid
     if (form.valid) {
-          // update travelSelection
+      // update travelSelection
       this.bookingService.updateTravelSelection(this.travelFormModel);
+      this.router.navigate(['/flight-booking']);
     }
 
-    
+
     // redirect to flight-booking.component
-    this.router.navigate(['/flight-booking']);
+
 
     // if no message handler error method
   }
