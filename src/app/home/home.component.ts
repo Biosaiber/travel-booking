@@ -15,10 +15,10 @@ import { FormsModule } from '@angular/forms';
 export class HomeComponent implements OnInit {
   countries: string[] = [];
   bookingService = inject(BookingService);
-  travelModel: TravelSelection = {
-    fromCountry: '',
-    toCountry: ''
-  };
+  travelFormModel: TravelSelection = {
+    fromCountry: "",
+    toCountry: ""
+  }
   ngOnInit(): void {
     this.countries = this.bookingService.getCountries();
   }
