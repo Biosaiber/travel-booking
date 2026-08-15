@@ -3,11 +3,19 @@ import { BookingDetails } from './models/booking.interface';
 import { Flight } from './models/flight.interface';
 import { Hotel } from './models/hotel.interface';
 
+export interface TravelSelection {
+  fromCountry: string;
+  toCountry: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookingService {
+  private travelSelection: TravelSelection = {
+    fromCountry: "",
+    toCountry: ""
+  };
   private bookingDetails: BookingDetails = {};
   private flights: Flight[] = [
     {
@@ -196,6 +204,22 @@ export class BookingService {
   }
   clearBookingDetails(): void {
     this.bookingDetails = {};
+  }
+
+  updateTravelSelection(selections: TravelSelection): void {
+    this.travelSelection = {
+      fromCountry: selections.fromCountry,
+      toCountry: selections.toCountry
+    }
+  }
+  getTravelSelection(): TravelSelection {
+    return this.travelSelection;
+  }
+  clearTravelSelection():void {
+    this.travelSelection = {
+      fromCountry: "",
+      toCountry: ""
+    }
   }
 
 }

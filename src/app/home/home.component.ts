@@ -1,11 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { BookingService } from '../booking.service';
+import { BookingService, TravelSelection } from '../booking.service';
 import { FormsModule } from '@angular/forms';
 
-interface TravelModel {
-  fromCountry: string;
-  toCountry: string;
-}
+
 
 @Component({
   selector: 'app-home',
@@ -18,7 +15,7 @@ interface TravelModel {
 export class HomeComponent implements OnInit {
   countries: string[] = [];
   bookingService = inject(BookingService);
-  travelModel: TravelModel = {
+  travelModel: TravelSelection = {
     fromCountry: '',
     toCountry: ''
   };
@@ -27,7 +24,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
-    
+
   }
 
 }
