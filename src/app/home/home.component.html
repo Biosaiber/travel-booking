@@ -3,23 +3,37 @@
         <label for="flight-from">
             Flight from:
         </label>
-        <select name="flight-from" id="flight-from" [(ngModel)]="travelFormModel.fromCountry" required>
+        <select name="flight-from" id="flight-from" [(ngModel)]="travelFormModel.fromCountry" #flightFrom="ngModel"
+            required>
+            <option value="" disabled>Select departure country</option>
             @for (country of this.countries; track country) {
             <option value="{{country}}">{{country}}</option>
             }
-
         </select>
+        @if (flightFrom.invalid && (flightFrom.touched || travelForm.submitted)) {
+        <span>Field required!</span>
+        }
     </div>
     <div>
         <label for="flight-to">
             Flight to:
         </label>
-        <select name="flight-to" id="flight-to" [(ngModel)]="travelFormModel.toCountry" required>
+        <select name="flight-to" id="flight-to" [(ngModel)]="travelFormModel.toCountry" #flightTo="ngModel" required>
+            <option value="" disabled>Select arrival country</option>
             @for (country of this.countries; track country) {
             <option value="{{country}}">{{country}}</option>
             }
 
         </select>
+        @if (flightTo.invalid && (flightTo.touched || travelForm.submitted)) {
+        <span>Field required!</span>
+        }
     </div>
+    <div>
+        @if ((flightFrom.value && flightTo.value) && (flightFrom.value === flightTo.value)) {
+        <span>Field cannot be same!</span>
+        }
+    </div>
+
     <button type="submit">Find flights</button>
 </form>
