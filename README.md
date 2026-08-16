@@ -318,7 +318,7 @@ Metódy
 Services
 
 BookingService
-- getBookingDetails()
+- getTravelSelection()
 - getFlights(fromCountry, toCountry)
 - updateBookingDetails()
 
