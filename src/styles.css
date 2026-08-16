@@ -17,6 +17,6 @@ input, select {
     width: 100%;
 }
 
-input.ng-invalid + span, select.ng-invalid + span form.ng-invalid .errMessage {
+input.ng-invalid + span, select.ng-invalid + span, form.ng-invalid .errMessage {
   color: red;
 }
