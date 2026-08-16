@@ -18,6 +18,7 @@ export class BookingService {
   };
   private bookingDetails: BookingDetails = {};
   private flights: Flight[] = [
+    // Netherlands → Germany
     {
       id: "FL001",
       airline: "KLM",
@@ -37,12 +38,13 @@ export class BookingService {
       toCountry: "Germany"
     },
 
+    // Netherlands → France
     {
       id: "FL003",
-      airline: "Ryanair",
+      airline: "KLM",
       travelClass: "Economy",
       departureTime: "09:15",
-      price: 120,
+      price: 140,
       fromCountry: "Netherlands",
       toCountry: "France"
     },
@@ -51,13 +53,74 @@ export class BookingService {
       airline: "Air France",
       travelClass: "Business",
       departureTime: "17:20",
-      price: 280,
+      price: 240,
       fromCountry: "Netherlands",
       toCountry: "France"
     },
 
+    // Netherlands → United Kingdom
     {
       id: "FL005",
+      airline: "KLM",
+      travelClass: "Economy",
+      departureTime: "07:40",
+      price: 130,
+      fromCountry: "Netherlands",
+      toCountry: "United Kingdom"
+    },
+    {
+      id: "FL006",
+      airline: "British Airways",
+      travelClass: "Business",
+      departureTime: "16:10",
+      price: 220,
+      fromCountry: "Netherlands",
+      toCountry: "United Kingdom"
+    },
+
+    // Germany → Netherlands
+    {
+      id: "FL007",
+      airline: "Lufthansa",
+      travelClass: "Economy",
+      departureTime: "08:00",
+      price: 175,
+      fromCountry: "Germany",
+      toCountry: "Netherlands"
+    },
+    {
+      id: "FL008",
+      airline: "KLM",
+      travelClass: "Business",
+      departureTime: "14:30",
+      price: 255,
+      fromCountry: "Germany",
+      toCountry: "Netherlands"
+    },
+
+    // Germany → France
+    {
+      id: "FL009",
+      airline: "Lufthansa",
+      travelClass: "Economy",
+      departureTime: "09:25",
+      price: 160,
+      fromCountry: "Germany",
+      toCountry: "France"
+    },
+    {
+      id: "FL010",
+      airline: "Air France",
+      travelClass: "Business",
+      departureTime: "18:00",
+      price: 270,
+      fromCountry: "Germany",
+      toCountry: "France"
+    },
+
+    // Germany → United Kingdom
+    {
+      id: "FL011",
       airline: "British Airways",
       travelClass: "Economy",
       departureTime: "10:00",
@@ -66,13 +129,133 @@ export class BookingService {
       toCountry: "United Kingdom"
     },
     {
-      id: "FL006",
-      airline: "EasyJet",
-      travelClass: "Economy",
+      id: "FL012",
+      airline: "Lufthansa",
+      travelClass: "Business",
       departureTime: "18:30",
-      price: 170,
+      price: 290,
       fromCountry: "Germany",
       toCountry: "United Kingdom"
+    },
+
+    // France → Netherlands
+    {
+      id: "FL013",
+      airline: "Air France",
+      travelClass: "Economy",
+      departureTime: "07:50",
+      price: 145,
+      fromCountry: "France",
+      toCountry: "Netherlands"
+    },
+    {
+      id: "FL014",
+      airline: "KLM",
+      travelClass: "Business",
+      departureTime: "15:40",
+      price: 235,
+      fromCountry: "France",
+      toCountry: "Netherlands"
+    },
+
+    // France → Germany
+    {
+      id: "FL015",
+      airline: "Air France",
+      travelClass: "Economy",
+      departureTime: "08:45",
+      price: 165,
+      fromCountry: "France",
+      toCountry: "Germany"
+    },
+    {
+      id: "FL016",
+      airline: "Lufthansa",
+      travelClass: "Business",
+      departureTime: "16:25",
+      price: 275,
+      fromCountry: "France",
+      toCountry: "Germany"
+    },
+
+    // France → United Kingdom
+    {
+      id: "FL017",
+      airline: "Air France",
+      travelClass: "Economy",
+      departureTime: "11:10",
+      price: 150,
+      fromCountry: "France",
+      toCountry: "United Kingdom"
+    },
+    {
+      id: "FL018",
+      airline: "British Airways",
+      travelClass: "Business",
+      departureTime: "19:15",
+      price: 245,
+      fromCountry: "France",
+      toCountry: "United Kingdom"
+    },
+
+    // United Kingdom → Netherlands
+    {
+      id: "FL019",
+      airline: "British Airways",
+      travelClass: "Economy",
+      departureTime: "07:30",
+      price: 135,
+      fromCountry: "United Kingdom",
+      toCountry: "Netherlands"
+    },
+    {
+      id: "FL020",
+      airline: "KLM",
+      travelClass: "Business",
+      departureTime: "14:50",
+      price: 225,
+      fromCountry: "United Kingdom",
+      toCountry: "Netherlands"
+    },
+
+    // United Kingdom → Germany
+    {
+      id: "FL021",
+      airline: "British Airways",
+      travelClass: "Economy",
+      departureTime: "09:40",
+      price: 205,
+      fromCountry: "United Kingdom",
+      toCountry: "Germany"
+    },
+    {
+      id: "FL022",
+      airline: "Lufthansa",
+      travelClass: "Business",
+      departureTime: "17:35",
+      price: 295,
+      fromCountry: "United Kingdom",
+      toCountry: "Germany"
+    },
+
+    // United Kingdom → France
+    {
+      id: "FL023",
+      airline: "British Airways",
+      travelClass: "Economy",
+      departureTime: "10:20",
+      price: 155,
+      fromCountry: "United Kingdom",
+      toCountry: "France"
+    },
+    {
+      id: "FL024",
+      airline: "Air France",
+      travelClass: "Business",
+      departureTime: "18:45",
+      price: 250,
+      fromCountry: "United Kingdom",
+      toCountry: "France"
     }
   ];
   private hotels: Hotel[] = [
@@ -215,7 +398,7 @@ export class BookingService {
   getTravelSelection(): TravelSelection {
     return this.travelSelection;
   }
-  clearTravelSelection():void {
+  clearTravelSelection(): void {
     this.travelSelection = {
       fromCountry: "",
       toCountry: ""
