@@ -5,6 +5,18 @@ body {
   background-color: #93bff0;
 }
 main {
-  max-width: 600px;
+  max-width: 300px;
   margin: 0 auto;
+}
+
+label {
+    display: block;
+}
+input, select {
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+input.ng-invalid + span, select.ng-invalid + span form.ng-invalid .errMessage {
+  color: red;
 }
