@@ -10,7 +10,7 @@ export interface BookingDetails {
     phone?: string;
 
     departureDate?: Date;
-    arrivalDate?: Date;
+    returnDate?: Date;
 
     travelers?: number;
 
