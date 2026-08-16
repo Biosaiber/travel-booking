@@ -1,1 +1,45 @@
-<p>flight-booking works!</p>
+
+
+
+
+<form [formGroup]="flightForm">
+    <div>
+        <select name="availableFlights" id="availableFlights">
+            <option value="" disabled>Select flight</option>
+            @for (avFlight of this.availableFlights; track avFlight.id) {
+            <option value="{{avFlight.id}}">{{avFlight.departureTime}}, {{avFlight.airline}}, {{avFlight.travelClass}},
+                {{avFlight.price}}€</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="name">name</label>
+        <input type="text" name="name" id="name">
+    </div>
+
+    <div>
+        <label for="travalers">number of travelers</label>
+        <input type="number" name="travalers" id="travalers">
+    </div>
+
+    <div>
+        <label for="departureDate">flight date to denstination</label>
+        <input type="date" name="departureDate" id="departureDate" formControlName="departureDate">
+        @if ( flightForm.controls.departureDate.touched && flightForm.controls.departureDate.errors?.['pastDate']) {
+            <span>Date cannot be in the past.</span>
+        }
+    </div>
+
+    <div>
+        <label for="returnDate">flight date from destination</label>
+        <input type="date" name="returnDate" id="returnDate">
+                @if ( flightForm.controls.returnDate.touched && flightForm.controls.returnDate.errors?.['pastDate']) {
+            <span>Date cannot be in the past.</span>
+        }
+    </div>
+
+
+
+
+    <button type="submit">Book Flight</button>
+</form>
