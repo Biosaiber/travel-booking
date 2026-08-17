@@ -20,8 +20,7 @@ export class FlightBooking implements OnInit {
     travelers: new FormControl("", [Validators.required, Validators.min(1)]),
     departureDate: new FormControl("", [Validators.required, this.noPastDateValidator]),
     returnDate: new FormControl("", [Validators.required])
-  });
-  // method for departureDate
+  }, [this.dateOrderValidator]);
   noPastDateValidator(control: AbstractControl) {
     const conValue = control.value;
     const today = new Date().toISOString().split('T')[0];
@@ -32,13 +31,20 @@ export class FlightBooking implements OnInit {
     }
   }
   dateOrderValidator(control: AbstractControl) {
-    const departureDate = this.flightForm.controls.departureDate.value;
-    const returnDate = this.flightForm.controls.returnDate.value;
+    const departureDate = control.get('departureDate')?.value;
+    const returnDate = control.get('returnDate')?.value;
+console.log('departure:', departureDate);
+  console.log('return:', returnDate);
+    if (!departureDate || !returnDate) {
+      return null;
+    }
 
-/*    TU SOM SKONCIL: robim metodu pre validaciu datumov aby returnDate nebol neskorsi ako departureDate 
-      if (returnDate > departureDate) {
-      return 
-    } */
+    if (returnDate <= departureDate) {
+       console.log('DATE ERROR!');
+      return { pastReturnDate: true };
+    }
+
+    return null;
   }
   ngOnInit(): void {
     console.log('INIT');
@@ -53,7 +59,4 @@ export class FlightBooking implements OnInit {
 
     console.log('availableFlights:', this.availableFlights);
   }
-
-
-  // method for aarivalDate
 }

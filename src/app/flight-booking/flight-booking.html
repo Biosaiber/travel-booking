@@ -32,14 +32,14 @@
 
     <div>
         <label for="returnDate">flight date from destination</label>
-        <input type="date" name="returnDate" id="returnDate">
-                @if ( flightForm.controls.returnDate.touched && flightForm.controls.returnDate.errors?.['pastDate']) {
-            <span>Date cannot be in the past.</span>
-        }
+        <input type="date" name="returnDate" id="returnDate" formControlName="returnDate">
+                @if (flightForm.hasError('pastReturnDate')) {
+                    <span>Return date cannot be before departure date.</span>
+                }
     </div>
 
 
-
+<p>Has error: {{ flightForm.hasError('pastReturnDate') }}</p>
 
     <button type="submit">Book Flight</button>
 </form>
