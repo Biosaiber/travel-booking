@@ -39,6 +39,9 @@
     <div class="input-box">
         <label for="departureDate">flight date to destination</label>
         <input type="date" name="departureDate" id="departureDate" formControlName="departureDate">
+        @if (flightForm.controls.departureDate.touched && flightForm.controls.departureDate.errors?.['required']) {
+        <span class="errMessage">Field required!</span>
+        }
         @if ( flightForm.controls.departureDate.touched && flightForm.controls.departureDate.errors?.['pastDate']) {
         <span class="errMessage">Date cannot be in the past.</span>
         }
@@ -47,8 +50,14 @@
     <div class="input-box">
         <label for="returnDate">flight date from destination</label>
         <input type="date" name="returnDate" id="returnDate" formControlName="returnDate">
+        @if (flightForm.controls.returnDate.touched && flightForm.controls.returnDate.errors?.['required']) {
+        <span class="errMessage">Field required!</span>
+        }
         @if (flightForm.hasError('pastReturnDate')) {
         <span class="errMessage">Return date cannot be before departure date.</span>
+        }
+        @if ( flightForm.controls.returnDate.touched && flightForm.controls.returnDate.errors?.['pastDate']) {
+        <span class="errMessage">Date cannot be in the past.</span>
         }
     </div>
 

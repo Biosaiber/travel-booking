@@ -19,7 +19,7 @@ export class FlightBooking implements OnInit {
     customerName: new FormControl("", [Validators.required, Validators.minLength(3)]),
     travelers: new FormControl("", [Validators.required, Validators.min(1)]),
     departureDate: new FormControl("", [Validators.required, this.noPastDateValidator]),
-    returnDate: new FormControl("", [Validators.required])
+    returnDate: new FormControl("", [Validators.required, this.noPastDateValidator])
   }, [this.dateOrderValidator]);
 
   noPastDateValidator(control: AbstractControl) {
