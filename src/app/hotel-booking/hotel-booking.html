@@ -1,1 +1,36 @@
-<p>hotel-booking works!</p>
+<div class="hotel-container">
+
+    @for (hotel of availableHotels; track hotel.id) {
+    <div class="hotel">
+        <input type="radio" id="{{hotel.id}}" name="hotel" value="{{hotel.id}}">
+        <label for="{{hotel.id}}">
+            <h3>{{hotel.name}} </h3>
+            <span class="address">{{hotel.address}}, {{hotel.country}}</span>
+            <h4> @for ( star of [].constructor(hotel.stars); track $index ) {
+                ★
+                }</h4>
+            <img [ngSrc]="hotel.imageUrl" alt="hotel.name" width="300" height="200">
+            <p class="price"><b>{{hotel.price}}€</b>/night</p>
+            <p class="avalability">available rooms: {{hotel.roomsAvailable}}</p>
+
+            @if (hotel.wifi) {
+            <p>Wifi</p>
+            } @else {
+            <p>No Wifi</p>
+            }
+            @if (hotel.breakfastIncluded) {
+            <p>Breakfast Included</p>
+            } @else {
+            <p>Breakfast Excluded</p>
+            }
+
+            <p>Rating: <b>{{hotel.rating}}</b></p>
+
+        </label>
+
+
+    </div>
+    }
+
+
+</div>

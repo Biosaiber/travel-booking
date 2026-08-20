@@ -270,7 +270,7 @@ export class BookingService {
       stars: 4,
       rating: 8.7,
       address: "Alexanderplatz 12, Berlin",
-      imageUrl: "https://picsum.photos/300/200?random=1",
+      imageUrl: "https://picsum.photos/id/164/600/400",
       wifi: true,
       breakfastIncluded: true
     },
@@ -283,8 +283,8 @@ export class BookingService {
       stars: 5,
       rating: 9.3,
       address: "Marienplatz 5, Munich",
-      imageUrl: "https://picsum.photos/300/200?random=2",
-      wifi: true,
+      imageUrl: "https://picsum.photos/id/225/600/400",
+      wifi: false,
       breakfastIncluded: false
     },
     {
@@ -296,7 +296,7 @@ export class BookingService {
       stars: 4,
       rating: 8.8,
       address: "Hafenstrasse 21, Hamburg",
-      imageUrl: "https://picsum.photos/300/200?random=3",
+      imageUrl: "https://picsum.photos/id/238/600/400",
       wifi: true,
       breakfastIncluded: true
     },
@@ -311,7 +311,7 @@ export class BookingService {
       stars: 4,
       rating: 8.9,
       address: "Rue de Rivoli 18, Paris",
-      imageUrl: "https://picsum.photos/300/200?random=4",
+      imageUrl: "https://picsum.photos/id/274/600/400",
       wifi: true,
       breakfastIncluded: true
     },
@@ -324,7 +324,7 @@ export class BookingService {
       stars: 5,
       rating: 9.6,
       address: "Promenade des Anglais 45, Nice",
-      imageUrl: "https://picsum.photos/300/200?random=5",
+      imageUrl: "https://picsum.photos/id/299/600/400",
       wifi: true,
       breakfastIncluded: true
     },
@@ -337,7 +337,7 @@ export class BookingService {
       stars: 3,
       rating: 8.4,
       address: "Quai du Rhone 14, Lyon",
-      imageUrl: "https://picsum.photos/300/200?random=6",
+      imageUrl: "https://picsum.photos/id/318/600/400",
       wifi: true,
       breakfastIncluded: false
     },
@@ -352,7 +352,7 @@ export class BookingService {
       stars: 5,
       rating: 9.4,
       address: "221 Baker Street, London",
-      imageUrl: "https://picsum.photos/300/200?random=7",
+      imageUrl: "https://picsum.photos/id/348/600/400",
       wifi: true,
       breakfastIncluded: false
     },
@@ -365,7 +365,7 @@ export class BookingService {
       stars: 3,
       rating: 8.1,
       address: "King Street 7, Manchester",
-      imageUrl: "https://picsum.photos/300/200?random=8",
+      imageUrl: "https://picsum.photos/id/364/600/400",
       wifi: true,
       breakfastIncluded: true
     },
@@ -378,7 +378,7 @@ export class BookingService {
       stars: 4,
       rating: 9.0,
       address: "Royal Mile 32, Edinburgh",
-      imageUrl: "https://picsum.photos/300/200?random=9",
+      imageUrl: "https://picsum.photos/id/392/600/400",
       wifi: true,
       breakfastIncluded: true
     },
@@ -393,7 +393,7 @@ export class BookingService {
       stars: 4,
       rating: 9.1,
       address: "Prinsengracht 120, Amsterdam",
-      imageUrl: "https://picsum.photos/300/200?random=10",
+      imageUrl: "https://picsum.photos/id/429/600/400",
       wifi: true,
       breakfastIncluded: true
     },
@@ -406,7 +406,7 @@ export class BookingService {
       stars: 4,
       rating: 8.6,
       address: "Coolsingel 42, Rotterdam",
-      imageUrl: "https://picsum.photos/300/200?random=11",
+      imageUrl: "https://picsum.photos/id/437/600/400",
       wifi: true,
       breakfastIncluded: false
     },
@@ -419,7 +419,7 @@ export class BookingService {
       stars: 3,
       rating: 8.3,
       address: "Stationsplein 8, Eindhoven",
-      imageUrl: "https://picsum.photos/300/200?random=12",
+      imageUrl: "https://picsum.photos/id/453/600/400",
       wifi: true,
       breakfastIncluded: true
     }
