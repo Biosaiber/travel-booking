@@ -259,6 +259,8 @@ export class BookingService {
     }
   ];
   private hotels: Hotel[] = [
+
+    // 🇩🇪 GERMANY
     {
       id: "HT001",
       name: "Berlin Central Hotel",
@@ -285,9 +287,23 @@ export class BookingService {
       wifi: true,
       breakfastIncluded: false
     },
-
     {
       id: "HT003",
+      name: "Hamburg Harbour Hotel",
+      country: "Germany",
+      price: 145,
+      roomsAvailable: 9,
+      stars: 4,
+      rating: 8.8,
+      address: "Hafenstrasse 21, Hamburg",
+      imageUrl: "https://picsum.photos/300/200?random=3",
+      wifi: true,
+      breakfastIncluded: true
+    },
+
+    // 🇫🇷 FRANCE
+    {
+      id: "HT004",
       name: "Paris City Hotel",
       country: "France",
       price: 150,
@@ -295,12 +311,12 @@ export class BookingService {
       stars: 4,
       rating: 8.9,
       address: "Rue de Rivoli 18, Paris",
-      imageUrl: "https://picsum.photos/300/200?random=3",
+      imageUrl: "https://picsum.photos/300/200?random=4",
       wifi: true,
       breakfastIncluded: true
     },
     {
-      id: "HT004",
+      id: "HT005",
       name: "Nice Beach Resort",
       country: "France",
       price: 220,
@@ -308,13 +324,27 @@ export class BookingService {
       stars: 5,
       rating: 9.6,
       address: "Promenade des Anglais 45, Nice",
-      imageUrl: "https://picsum.photos/300/200?random=4",
+      imageUrl: "https://picsum.photos/300/200?random=5",
       wifi: true,
       breakfastIncluded: true
     },
-
     {
-      id: "HT005",
+      id: "HT006",
+      name: "Lyon Riverside Hotel",
+      country: "France",
+      price: 135,
+      roomsAvailable: 11,
+      stars: 3,
+      rating: 8.4,
+      address: "Quai du Rhone 14, Lyon",
+      imageUrl: "https://picsum.photos/300/200?random=6",
+      wifi: true,
+      breakfastIncluded: false
+    },
+
+    // 🇬🇧 UNITED KINGDOM
+    {
+      id: "HT007",
       name: "London Royal Hotel",
       country: "United Kingdom",
       price: 210,
@@ -322,12 +352,12 @@ export class BookingService {
       stars: 5,
       rating: 9.4,
       address: "221 Baker Street, London",
-      imageUrl: "https://picsum.photos/300/200?random=5",
+      imageUrl: "https://picsum.photos/300/200?random=7",
       wifi: true,
       breakfastIncluded: false
     },
     {
-      id: "HT006",
+      id: "HT008",
       name: "Manchester Comfort Inn",
       country: "United Kingdom",
       price: 140,
@@ -335,10 +365,65 @@ export class BookingService {
       stars: 3,
       rating: 8.1,
       address: "King Street 7, Manchester",
-      imageUrl: "https://picsum.photos/300/200?random=6",
+      imageUrl: "https://picsum.photos/300/200?random=8",
+      wifi: true,
+      breakfastIncluded: true
+    },
+    {
+      id: "HT009",
+      name: "Edinburgh Castle View",
+      country: "United Kingdom",
+      price: 175,
+      roomsAvailable: 6,
+      stars: 4,
+      rating: 9.0,
+      address: "Royal Mile 32, Edinburgh",
+      imageUrl: "https://picsum.photos/300/200?random=9",
+      wifi: true,
+      breakfastIncluded: true
+    },
+
+    // 🇳🇱 NETHERLANDS
+    {
+      id: "HT010",
+      name: "Amsterdam Canal Hotel",
+      country: "Netherlands",
+      price: 190,
+      roomsAvailable: 8,
+      stars: 4,
+      rating: 9.1,
+      address: "Prinsengracht 120, Amsterdam",
+      imageUrl: "https://picsum.photos/300/200?random=10",
+      wifi: true,
+      breakfastIncluded: true
+    },
+    {
+      id: "HT011",
+      name: "Rotterdam Harbour Hotel",
+      country: "Netherlands",
+      price: 145,
+      roomsAvailable: 13,
+      stars: 4,
+      rating: 8.6,
+      address: "Coolsingel 42, Rotterdam",
+      imageUrl: "https://picsum.photos/300/200?random=11",
+      wifi: true,
+      breakfastIncluded: false
+    },
+    {
+      id: "HT012",
+      name: "Eindhoven City Stay",
+      country: "Netherlands",
+      price: 115,
+      roomsAvailable: 15,
+      stars: 3,
+      rating: 8.3,
+      address: "Stationsplein 8, Eindhoven",
+      imageUrl: "https://picsum.photos/300/200?random=12",
       wifi: true,
       breakfastIncluded: true
     }
+
   ];
 
   getCountries(): string[] {
