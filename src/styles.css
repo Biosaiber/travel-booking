@@ -37,6 +37,7 @@ button[type="submit"] {
   cursor: pointer;
   border: none;
   background-color: #0099ff;
+  min-height: 28px;
 }
 
 .input-box {
