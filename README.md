@@ -122,18 +122,17 @@ APP:
 ```
 HomeComponent
       │
-      │ updateBookingDetails(fromCountry, toCountry)
-      ▼
-BookingService
-      │
-      ▼
-BookingDetails
+      └── updateTravelSelection(...)
+               ↓
+        BookingService
+               ↓
+        TravelSelection
 ```
 
 ```
 FlightBookingComponent
       │
-      ├── getBookingDetails()
+      ├── getTravelSelection()
       │        ↓
       │   fromCountry, toCountry
       │
@@ -209,8 +208,8 @@ export interface BookingDetails {
     email?: string; // "Táto property nemusí existovať."
     phone?: string;
 
-    departureDate?: Date;
-    arrivalDate?: Date;
+    departureDate?: string;
+    arrivalDate?: string;
 
     travelers?: number;
 
@@ -331,7 +330,42 @@ Naviguje na
 - HotelBookingComponent
 ```
 
-#### HotelBookingComponent
+#### HotelBookingComponent
+
+Zodpovednosť
+- zobraziť dostupné hotely podľa cieľovej krajiny
+- načítať existujúce BookingDetails
+- umožniť výber hotela
+- získať email, telefón a počet izieb
+- validovať hotelový formulár
+- vypočítať hotelovú časť ceny
+- doplniť BookingDetails
+- navigovať na SummaryComponent
+
+Dáta
+- availableHotels: Hotel[]
+- bookingDetails: BookingDetails
+- hotelForm / údaje z formulára
+
+Metódy
+- ngOnInit()
+- onSubmit()
+- handleErrors()
+
+Services
+
+BookingService
+- getBookingDetails()
+- getHotels(toCountry)
+- updateBookingDetails()
+
+LogErrorService
+- addError()
+- getErrors()
+- clearErrors()
+
+Naviguje na
+- SummaryComponent
 
 #### SummaryComponent
 
