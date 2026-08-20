@@ -6,11 +6,11 @@ export interface BookingDetails {
     hotel?: Hotel;
 
     customerName?: string;
-    email?: string; 
+    email?: string;
     phone?: string;
 
-    departureDate?: Date;
-    returnDate?: Date;
+    departureDate?: string;
+    returnDate?: string;
 
     travelers?: number;
 
