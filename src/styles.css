@@ -43,3 +43,7 @@ button[type="submit"] {
 .input-box {
   margin-bottom: 16px;
 }
+label {
+  font-size: 1em;
+  font-style: inherit;
+}

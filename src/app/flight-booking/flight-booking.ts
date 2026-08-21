@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { TravelSelection } from '../booking.service';
 import { Flight } from '../models/flight.interface';
-import { ReactiveFormsModule, AbstractControl, FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
+import { ReactiveFormsModule, AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookingDetails } from '../models/booking.interface';
 import { Router } from '@angular/router';
 
