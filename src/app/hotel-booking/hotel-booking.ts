@@ -4,6 +4,7 @@ import { BookingDetails } from '../models/booking.interface';
 import { BookingService } from '../booking.service';
 import { NgOptimizedImage } from '@angular/common';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hotel-booking',
@@ -18,11 +19,12 @@ export class HotelBooking implements OnInit {
   selectedHotelId!: string;
   selectedHotel: Hotel | undefined;
   bookingService = inject(BookingService);
+  router = inject(Router);
   hotelForm = new FormGroup({
-    hotelId: new FormControl("", [Validators.required]),
-    email: new FormControl("", [Validators.required, Validators.email]),
-    phone: new FormControl("", [Validators.required, Validators.pattern(/^\d{9,15}$/)]),
-    rooms: new FormControl("", [Validators.required, Validators.min(1)])
+    hotelId: new FormControl("", {nonNullable: true, validators: [Validators.required]} ),
+    email: new FormControl("", {nonNullable: true, validators: [Validators.required, Validators.email]} ),
+    phone: new FormControl("", {nonNullable: true, validators: [Validators.required, Validators.pattern(/^\d{9,15}$/)]} ),
+    rooms: new FormControl("", {nonNullable: true, validators: [Validators.required, Validators.min(1)]} )
   })
   ngOnInit(): void {
 
@@ -53,8 +55,32 @@ export class HotelBooking implements OnInit {
       ]);
 
       this.hotelForm.controls.rooms.updateValueAndValidity();
-    
+
 
     })
+  }
+  onSubmit() {
+    if (this.hotelForm.valid) {
+
+
+      const hotelFormSave = this.hotelForm.getRawValue()
+      console.log(hotelFormSave);
+
+      const chosenHotel = this.availableHotels.find(hotel => hotel.id === hotelFormSave.hotelId);
+
+      if (!chosenHotel) {
+        return;
+      }
+      const hotelDetails: Partial<BookingDetails> = {
+        hotel: chosenHotel,
+        email: hotelFormSave.email,
+        phone: hotelFormSave.phone,
+        rooms: Number(hotelFormSave.rooms)
+      }
+
+      this.bookingService.updateBookingDetails(hotelDetails);
+      
+      this.router.navigate(['/summary']);
+    }
   }
 }

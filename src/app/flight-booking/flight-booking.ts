@@ -65,10 +65,6 @@ export class FlightBooking implements OnInit {
   }
   onSubmit() {
     if (this.flightForm.valid) {
-      console.log(this.flightForm.value);
-
-
-
 
       const flightFormSave = this.flightForm.value;
 
