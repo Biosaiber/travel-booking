@@ -15,6 +15,8 @@ export class HotelBooking implements OnInit {
   availableHotels!: Hotel[];
   savedBookingDetails!: BookingDetails;
   savedFlightDestination!: string;
+  selectedHotelId!: string;
+  selectedHotel: Hotel | undefined;
   bookingService = inject(BookingService);
   hotelForm = new FormGroup({
     hotelId: new FormControl("", [Validators.required]),
@@ -23,12 +25,36 @@ export class HotelBooking implements OnInit {
     rooms: new FormControl("", [Validators.required, Validators.min(1)])
   })
   ngOnInit(): void {
+
     this.savedBookingDetails = this.bookingService.getBookingDetails();
     if (!this.savedBookingDetails.flight) {
       return;
     }
     this.savedFlightDestination = this.savedBookingDetails.flight.toCountry;
     this.availableHotels = this.bookingService.getHotels(this.savedFlightDestination);
-    console.log(this.availableHotels);
+
+    this.hotelForm.controls.hotelId.valueChanges.subscribe(value => {
+
+      if (value === null) {
+        return;
+      }
+      this.selectedHotelId = value;
+
+      const hotel = this.availableHotels.find(hotel => this.selectedHotelId === hotel.id);
+      if (!hotel) {
+        return;
+      }
+      this.selectedHotel = hotel;
+
+      this.hotelForm.controls.rooms.setValidators([
+        Validators.required,
+        Validators.min(1),
+        Validators.max(this.selectedHotel.roomsAvailable)
+      ]);
+
+      this.hotelForm.controls.rooms.updateValueAndValidity();
+    
+
+    })
   }
 }
