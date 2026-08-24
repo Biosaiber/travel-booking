@@ -49,3 +49,9 @@ p.avalability ~ p {
 .hotel:hover label {
     cursor: pointer;
 }
+.hotel input[type="radio"] {
+    display: none;
+}
+.hotel.selected {
+    background-color: #689cfa;
+}
