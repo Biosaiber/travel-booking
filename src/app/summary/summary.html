@@ -1,1 +1,75 @@
-<p>summary works!</p>
+<h3>Your booking details</h3>
+
+<h4>Trip</h4>
+
+<ul>
+    <li>{{this.summaryDetails?.flight?.fromCountry}} -> {{this.summaryDetails?.flight?.toCountry}}</li>
+    <li>departure date: {{this.summaryDetails?.departureDate}}</li>
+    <li>return date: {{this.summaryDetails?.returnDate}}</li>
+</ul>
+<h4>Flight</h4>
+<ul>
+    <li>{{this.summaryDetails?.flight?.airline}}</li>
+    <li>{{this.summaryDetails?.flight?.travelClass}}</li>
+    <li>Departure: {{this.summaryDetails?.flight?.departureTime}}</li>
+    <li>€{{this.summaryDetails?.flight?.price}} / traveler</li>
+</ul>
+<h4>Passenger</h4>
+<ul>
+    <li>{{this.summaryDetails?.customerName}}</li>
+    <li>{{this.summaryDetails?.travelers}} 
+
+        @if (this.summaryDetails?.travelers === 1 ) {
+            travaler
+        } @else {
+            travalers
+        }
+    </li>
+</ul>
+<h4>Hotel</h4>
+<ul>
+    <li>{{this.summaryDetails?.hotel?.name}} {{this.summaryDetails?.hotel?.stars}}</li>
+    <li>{{this.summaryDetails?.hotel?.address}}</li>
+    <li>{{this.summaryDetails?.hotel?.price}} / travaler</li>
+    <li>{{this.summaryDetails?.rooms}} 
+        @if (this.summaryDetails?.rooms === 1) {
+            room
+        } @else {
+            rooms
+        }
+    </li>
+</ul>
+<h4>Contact</h4>
+<ul>
+    <li>email: {{this.summaryDetails?.email}}</li>
+    <li>phone: {{this.summaryDetails?.phone}}</li>
+</ul>
+<h4>Total cost: €{{totalCost}}</h4>
+<!-- <p>€{{this.summaryDetails?.flight.}}</p> -->
+
+<!-- Trip
+Netherlands → Germany
+18.08.2026 → 22.08.2026
+
+Flight
+KLM
+Economy
+Departure: 07:40
+€130 / traveler
+
+Passenger
+Samuel Liska
+1 traveler
+
+Hotel
+Berlin Central Hotel ★★★★
+Alexanderplatz 12, Berlin
+€120 / night
+2 rooms
+
+Contact
+email...
+phone...
+
+TOTAL
+€.... -->
