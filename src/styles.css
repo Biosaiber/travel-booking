@@ -27,7 +27,7 @@ select, input[type="date"], input[type="name"], input[type="number"], input[type
   min-height: 28px;
 }
 
-input.ng-invalid + span, select.ng-invalid + span, form.ng-invalid .errMessage {
+input.ng-invalid + span, select.ng-invalid + span, form.ng-invalid .errMessage span {
   color: red;
   font-size: 0.7em;
 }
