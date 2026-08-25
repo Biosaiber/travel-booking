@@ -14,8 +14,8 @@ import { AbstractControl, NG_VALIDATORS, Validator } from '@angular/forms';
 })
 export class SameCountryValidatorDirective implements Validator {
     validate(control: AbstractControl) {
-        const fromCountry = control.get('fromCountry')?.value;
-        const toCountry = control.get('toCountry')?.value;
+        const fromCountry = control.get('flight-from')?.value;
+        const toCountry = control.get('flight-to')?.value;
 
         if (!fromCountry || !toCountry) {
             return null;
