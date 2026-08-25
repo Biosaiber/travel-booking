@@ -3,7 +3,7 @@ import { Hotel } from '../models/hotel.interface';
 import { BookingDetails } from '../models/booking.interface';
 import { BookingService } from '../booking.service';
 import { NgOptimizedImage, CurrencyPipe } from '@angular/common';
-import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,12 +21,19 @@ export class HotelBooking implements OnInit {
   selectedHotel: Hotel | undefined;
   bookingService = inject(BookingService);
   router = inject(Router);
-  hotelForm = new FormGroup({
-    hotelId: new FormControl("", {nonNullable: true, validators: [Validators.required]} ),
-    email: new FormControl("", {nonNullable: true, validators: [Validators.required, Validators.email]} ),
-    phone: new FormControl("", {nonNullable: true, validators: [Validators.required, Validators.pattern(/^\d{9,15}$/)]} ),
-    rooms: new FormControl("", {nonNullable: true, validators: [Validators.required, Validators.min(1)]} )
-  })
+  private formBuilder = inject(FormBuilder);
+  hotelForm = this.formBuilder.nonNullable.group({
+    hotelId: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    phone: ['', [
+      Validators.required,
+      Validators.pattern(/^\d{9,15}$/)
+    ]],
+    rooms: ['', [
+      Validators.required,
+      Validators.min(1)
+    ]]
+  });
   ngOnInit(): void {
 
     this.savedBookingDetails = this.bookingService.getBookingDetails();
@@ -80,7 +87,7 @@ export class HotelBooking implements OnInit {
       }
 
       this.bookingService.updateBookingDetails(hotelDetails);
-      
+
       this.router.navigate(['/summary']);
     }
   }
