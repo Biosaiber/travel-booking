@@ -1,4 +1,4 @@
-<form #travelForm="ngForm" (ngSubmit)="onSubmit(travelForm)">
+<form #travelForm="ngForm" sameCountryValidator (ngSubmit)="onSubmit(travelForm)">
     <div class="input-box">
         <label for="flight-from">
             Flight from:
@@ -34,6 +34,8 @@
         <span>Field cannot be same!</span>
         }
     </div>
+
+
 
     <button type="submit">Find flights</button>
 </form>

@@ -2,12 +2,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { BookingService, TravelSelection } from '../booking.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SameCountryValidatorDirective } from '../same-country.validator';
 
 
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule],
+  imports: [FormsModule, SameCountryValidatorDirective],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
