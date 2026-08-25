@@ -54,7 +54,7 @@
                     ★
                     }</h4>
                 <img [ngSrc]="hotel.imageUrl" alt="hotel.name" width="300" height="200">
-                <p class="price"><b>{{hotel.price}}€</b>/night</p>
+                <p class="price"><b>{{hotel.price | currency: 'EUR' }}</b>/night</p>
                 <p class="avalability">available rooms: {{hotel.roomsAvailable}}</p>
 
                 @if (hotel.wifi) {

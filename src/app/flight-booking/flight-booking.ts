@@ -5,10 +5,12 @@ import { Flight } from '../models/flight.interface';
 import { ReactiveFormsModule, AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookingDetails } from '../models/booking.interface';
 import { Router } from '@angular/router';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-flight-booking',
-  imports: [ReactiveFormsModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, CurrencyPipe],
   templateUrl: './flight-booking.html',
   styleUrl: './flight-booking.css',
 })

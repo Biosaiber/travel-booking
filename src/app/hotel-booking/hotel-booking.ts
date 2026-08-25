@@ -2,13 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Hotel } from '../models/hotel.interface';
 import { BookingDetails } from '../models/booking.interface';
 import { BookingService } from '../booking.service';
-import { NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, CurrencyPipe } from '@angular/common';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hotel-booking',
-  imports: [NgOptimizedImage, ReactiveFormsModule],
+  standalone: true,
+  imports: [NgOptimizedImage, ReactiveFormsModule, CurrencyPipe],
   templateUrl: './hotel-booking.html',
   styleUrl: './hotel-booking.css',
 })

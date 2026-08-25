@@ -3,73 +3,45 @@
 <h4>Trip</h4>
 
 <ul>
-    <li>{{this.summaryDetails?.flight?.fromCountry}} -> {{this.summaryDetails?.flight?.toCountry}}</li>
-    <li>departure date: {{this.summaryDetails?.departureDate}}</li>
-    <li>return date: {{this.summaryDetails?.returnDate}}</li>
+    <li>{{summaryDetails?.flight?.fromCountry}} -> {{summaryDetails?.flight?.toCountry}}</li>
+    <li>departure date: {{summaryDetails?.departureDate}}</li>
+    <li>return date: {{summaryDetails?.returnDate}}</li>
 </ul>
 <h4>Flight</h4>
 <ul>
-    <li>{{this.summaryDetails?.flight?.airline}}</li>
-    <li>{{this.summaryDetails?.flight?.travelClass}}</li>
-    <li>Departure: {{this.summaryDetails?.flight?.departureTime}}</li>
-    <li>€{{this.summaryDetails?.flight?.price}} / traveler</li>
+    <li>{{summaryDetails?.flight?.airline}}</li>
+    <li>{{summaryDetails?.flight?.travelClass}}</li>
+    <li>Departure: {{summaryDetails?.flight?.departureTime}}</li>
+    <li>{{summaryDetails?.flight?.price | currency: 'EUR' }} / traveler</li>
 </ul>
 <h4>Passenger</h4>
 <ul>
-    <li>{{this.summaryDetails?.customerName}}</li>
-    <li>{{this.summaryDetails?.travelers}} 
+    <li>{{summaryDetails?.customerName}}</li>
+    <li>{{summaryDetails?.travelers}}
 
-        @if (this.summaryDetails?.travelers === 1 ) {
-            travaler
+        @if (summaryDetails?.travelers === 1 ) {
+        travaler
         } @else {
-            travalers
+        travalers
         }
     </li>
 </ul>
 <h4>Hotel</h4>
 <ul>
-    <li>{{this.summaryDetails?.hotel?.name}} {{this.summaryDetails?.hotel?.stars}}</li>
-    <li>{{this.summaryDetails?.hotel?.address}}</li>
-    <li>{{this.summaryDetails?.hotel?.price}} / travaler</li>
-    <li>{{this.summaryDetails?.rooms}} 
-        @if (this.summaryDetails?.rooms === 1) {
-            room
+    <li>{{summaryDetails?.hotel?.name}} {{summaryDetails?.hotel?.stars}}</li>
+    <li>{{summaryDetails?.hotel?.address}}</li>
+    <li>{{summaryDetails?.hotel?.price | currency: 'EUR' }} / travaler</li>
+    <li>{{summaryDetails?.rooms}}
+        @if (summaryDetails?.rooms === 1) {
+        room
         } @else {
-            rooms
+        rooms
         }
     </li>
 </ul>
 <h4>Contact</h4>
 <ul>
-    <li>email: {{this.summaryDetails?.email}}</li>
-    <li>phone: {{this.summaryDetails?.phone}}</li>
+    <li>email: {{summaryDetails?.email}}</li>
+    <li>phone: {{summaryDetails?.phone}}</li>
 </ul>
-<h4>Total cost: €{{this.summaryDetails?.totalCost}}</h4>
-<!-- <p>€{{this.summaryDetails?.flight.}}</p> -->
-
-<!-- Trip
-Netherlands → Germany
-18.08.2026 → 22.08.2026
-
-Flight
-KLM
-Economy
-Departure: 07:40
-€130 / traveler
-
-Passenger
-Samuel Liska
-1 traveler
-
-Hotel
-Berlin Central Hotel ★★★★
-Alexanderplatz 12, Berlin
-€120 / night
-2 rooms
-
-Contact
-email...
-phone...
-
-TOTAL
-€.... -->
+<h4>Total cost: {{summaryDetails?.totalCost | currency: 'EUR' }}</h4>

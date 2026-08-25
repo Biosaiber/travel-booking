@@ -1,10 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { BookingDetails } from '../models/booking.interface';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-summary',
-  imports: [],
+  standalone: true,
+  imports: [CurrencyPipe],
   templateUrl: './summary.html',
   styleUrl: './summary.css',
 })
