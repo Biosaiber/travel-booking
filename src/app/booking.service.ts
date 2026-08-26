@@ -442,23 +442,11 @@ export class BookingService {
   }
 
   getFlights(fromCountry: string, toCountry: string): Flight[] {
-    const availableFlights: Flight[] = [];
-    for (const flight of this.flights) {
-      if (fromCountry === flight.fromCountry && toCountry === flight.toCountry) {
-        availableFlights.push(flight);
-      }
-    }
-    return availableFlights;
+    return this.flights.filter(flight => (fromCountry === flight.fromCountry && toCountry === flight.toCountry));
   }
 
   getHotels(toCountry: string): Hotel[] {
-    const availableHotels: Hotel[] = [];
-    for (const hotel of this.hotels) {
-      if (toCountry === hotel.country) {
-        availableHotels.push(hotel);
-      }
-    }
-    return availableHotels;
+    return this.hotels.filter(hotel => (toCountry === hotel.country));
   }
 
   updateBookingDetails(details: Partial<BookingDetails>): void {
@@ -467,9 +455,11 @@ export class BookingService {
       ...details
     };
   }
+
   getBookingDetails(): BookingDetails {
     return this.bookingDetails;
   }
+
   clearBookingDetails(): void {
     this.bookingDetails = {};
   }
