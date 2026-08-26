@@ -1,3 +1,12 @@
 .input-box {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+select.ng-valid.ng-touched, .valid-date, input.ng-valid.ng-touched {
+  border: 1px solid lightgreen;
+}
+
+.errMessage span{
+  color: red;
+  font-size: 0.7em;
 }

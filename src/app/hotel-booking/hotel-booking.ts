@@ -3,7 +3,7 @@ import { Hotel } from '../models/hotel.interface';
 import { BookingDetails } from '../models/booking.interface';
 import { BookingService } from '../booking.service';
 import { NgOptimizedImage, CurrencyPipe } from '@angular/common';
-import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,6 +19,7 @@ export class HotelBooking implements OnInit {
   savedFlightDestination!: string;
   selectedHotelId!: string;
   selectedHotel: Hotel | undefined;
+  submitted = false;
   bookingService = inject(BookingService);
   router = inject(Router);
   private formBuilder = inject(FormBuilder);
@@ -68,6 +69,7 @@ export class HotelBooking implements OnInit {
     })
   }
   onSubmit() {
+    this.submitted = true;
     if (this.hotelForm.valid) {
 
 

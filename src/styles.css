@@ -19,7 +19,8 @@ select,
 input[type='date'],
 input[type='name'],
 input[type='number'],
-input[type='text'] {
+input[type='text'],
+input[type='email'] {
   min-height: 28px;
 }
 

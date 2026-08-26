@@ -3,38 +3,47 @@
     <div class="input-box">
         <label for="email">email</label>
         <input type="email" id="email" formControlName="email">
-        @if (hotelForm.controls.email.touched && hotelForm.controls.email.errors?.['required']) {
-        <span>field email is required!</span>
-        }
-        @if (hotelForm.controls.email.touched && hotelForm.controls.email.errors?.['email']) {
-        <span>Email must be in format name@server.com!</span>
-        }
+        <div class="errMessage">
+            @if ((hotelForm.controls.email.touched || submitted) && hotelForm.controls.email.errors?.['required']) {
+            <span>field email is required!</span>
+            }
+            @if (hotelForm.controls.email.touched && hotelForm.controls.email.errors?.['email']) {
+            <span>Email must be in format name@server.com!</span>
+            }
+        </div>
+
     </div>
 
     <div class="input-box">
         <label for="phone">phone</label>
         <input type="text" id="phone" formControlName="phone">
-        @if (hotelForm.controls.phone.touched && hotelForm.controls.phone.errors?.['required']) {
-        <span>Phone field is required!</span>
-        }
-        @if (hotelForm.controls.phone.touched && hotelForm.controls.phone.errors?.['pattern']) {
-        <span>Phone field must contain only numbers and 9 to 15 digits!</span>
-        }
+        <div class="errMessage">
+            @if ((hotelForm.controls.phone.touched || submitted) && hotelForm.controls.phone.errors?.['required']) {
+            <span>Phone field is required!</span>
+            }
+            @if (hotelForm.controls.phone.touched && hotelForm.controls.phone.errors?.['pattern']) {
+            <span>Phone field must contain only numbers and 9 to 15 digits!</span>
+            }
+        </div>
+
 
     </div>
 
     <div class="input-box">
         <label for="rooms">rooms</label>
         <input type="number" id="rooms" formControlName="rooms">
-        @if (hotelForm.controls.rooms.touched && hotelForm.controls.rooms.errors?.['required']) {
-        <span>Rooms field is required!</span>
-        }
-        @if (hotelForm.controls.rooms.touched && hotelForm.controls.rooms.errors?.['min']) {
-        <span>1 is minimal value!</span>
-        }
-        @if (hotelForm.controls.rooms.touched && hotelForm.controls.rooms.errors?.['max']) {
-        <span>{{this.selectedHotel?.roomsAvailable}} is maximal value!</span>
-        }
+        <div class="errMessage">
+            @if ((hotelForm.controls.rooms.touched || submitted) && hotelForm.controls.rooms.errors?.['required']) {
+            <span>Rooms field is required!</span>
+            }
+            @if (hotelForm.controls.rooms.touched && hotelForm.controls.rooms.errors?.['min']) {
+            <span>1 is minimal value!</span>
+            }
+            @if (hotelForm.controls.rooms.touched && hotelForm.controls.rooms.errors?.['max']) {
+            <span>{{this.selectedHotel?.roomsAvailable}} is maximal value!</span>
+            }
+        </div>
+
 
     </div>
 
@@ -43,9 +52,7 @@
         <div class="hotel" [class.selected]="selectedHotelId === hotel.id">
             <input type="radio" [id]="hotel.id" name="hotelId" [value]="hotel.id" formControlName="hotelId">
 
-            @if (hotelForm.controls.hotelId.touched && hotelForm.controls.hotelId.errors?.['required']) {
-            <span>Pick a hotel is required!</span>
-            }
+
 
             <label [for]="hotel.id">
                 <h3>{{hotel.name}} </h3>
@@ -74,6 +81,12 @@
 
         </div>
         }
+        <div class="errMessage">
+            @if ((hotelForm.controls.hotelId.touched || submitted) && hotelForm.controls.hotelId.errors?.['required']) {
+            <span>Hotel is required!</span>
+            }
+        </div>
+
 
     </div>
 
