@@ -8,35 +8,18 @@ main {
   max-width: 300px;
   margin: 0 auto;
 }
+
 input,
 select {
   box-sizing: border-box;
   width: 100%;
 }
 
-label {
-        display: block;
-    font-size: 0.7rem;
-    font-style: italic;
-}
-input, select, button[type="submit"]  {
-    font-size: 1rem;
-    width: 100%;
-}
-select, input[type="date"], input[type="name"], input[type="number"], input[type="text"] {
-  min-height: 28px;
-}
-
-input.ng-invalid + span, select.ng-invalid + span, form.ng-invalid .errMessage span,  .errMessage span{
-  color: red;
-  font-size: 0.7em;
-}
-
-
-button[type="submit"] {
-  cursor: pointer;
-  border: none;
-  background-color: #0099ff;
+select,
+input[type='date'],
+input[type='name'],
+input[type='number'],
+input[type='text'] {
   min-height: 28px;
 }
 
@@ -44,6 +27,15 @@ button[type="submit"] {
   margin-bottom: 16px;
 }
 label {
-  font-size: 1em;
-  font-style: inherit;
+  display: block;
+  font-size: 0.7rem;
+  font-style: italic;
+}
+button[type='submit'] {
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  background-color: #0099ff;
+  min-height: 28px;
+  color: #fff;
 }

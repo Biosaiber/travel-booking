@@ -1,0 +1,7 @@
+select.valid.ng-touched {
+  border: 1px solid lightgreen;
+}
+.errMessage span{
+  color: red;
+  font-size: 0.7em;
+}

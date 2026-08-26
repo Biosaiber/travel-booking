@@ -27,19 +27,13 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    // validation
-    // if valid
+
     if (form.valid && (this.travelFormModel.fromCountry !== this.travelFormModel.toCountry)) {
-      // update travelSelection
+
       this.bookingService.updateTravelSelection(this.travelFormModel);
       this.router.navigate(['/flight-booking']);
     }
 
-
-    // redirect to flight-booking.component
-
-
-    // if no message handler error method
   }
 
 }

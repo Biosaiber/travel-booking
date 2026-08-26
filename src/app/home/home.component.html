@@ -3,34 +3,43 @@
         <label for="flight-from">
             Flight from:
         </label>
-        <select name="flight-from" id="flight-from" [(ngModel)]="travelFormModel.fromCountry" #flightFrom="ngModel"
-            required>
+        <select name="flight-from" id="flight-from" [(ngModel)]="travelFormModel.fromCountry"
+            [class.valid]="flightFrom.touched && flightFrom.valid && !travelForm.hasError('sameCountry')"
+            #flightFrom="ngModel" required>
             <option value="" disabled>Select departure country</option>
             @for (country of this.countries; track country) {
             <option value="{{country}}">{{country}}</option>
             }
         </select>
-        @if (flightFrom.invalid && (flightFrom.touched || travelForm.submitted)) {
-        <span>Field required!</span>
-        }
+        <div class="errMessage">
+            @if (flightFrom.invalid && (flightFrom.touched || travelForm.submitted)) {
+            <span>Field required!</span>
+            }
+        </div>
+
     </div>
     <div class="input-box">
         <label for="flight-to">
             Flight to:
         </label>
-        <select name="flight-to" id="flight-to" [(ngModel)]="travelFormModel.toCountry" #flightTo="ngModel" required>
+        <select name="flight-to" id="flight-to" [(ngModel)]="travelFormModel.toCountry"
+            [class.valid]="flightTo.touched && flightTo.valid && !travelForm.hasError('sameCountry')"
+            #flightTo="ngModel" required>
             <option value="" disabled>Select arrival country</option>
             @for (country of this.countries; track country) {
             <option value="{{country}}">{{country}}</option>
             }
 
         </select>
-        @if (flightTo.invalid && (flightTo.touched || travelForm.submitted)) {
-        <span>Field required!</span>
-        }
+        <div class="errMessage">
+            @if (flightTo.invalid && (flightTo.touched || travelForm.submitted)) {
+            <span>Field required!</span>
+            }
+        </div>
+
     </div>
     <div class="errMessage">
-        @if ((flightFrom.value && flightTo.value) && (flightFrom.value === flightTo.value)) {
+        @if (travelForm.hasError('sameCountry')) {
         <span>Field cannot be same!</span>
         }
     </div>
