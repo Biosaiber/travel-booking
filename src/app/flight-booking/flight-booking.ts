@@ -19,6 +19,7 @@ export class FlightBooking implements OnInit {
   router = inject(Router);
   journey!: TravelSelection;
   availableFlights!: Flight[];
+  submitted = false;
   flightForm = new FormGroup({
     flightId: new FormControl("", [Validators.required]),
     customerName: new FormControl("", { nonNullable: true, validators: [Validators.required, Validators.minLength(3)] }),
@@ -66,6 +67,7 @@ export class FlightBooking implements OnInit {
 
   }
   onSubmit() {
+    this.submitted = true;
     if (this.flightForm.valid) {
 
       const flightFormSave = this.flightForm.value;

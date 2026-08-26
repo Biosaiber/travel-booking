@@ -9,7 +9,7 @@
 
         </select>
         <div class="errMessage">
-            @if (flightForm.controls.flightId.touched && flightForm.controls.flightId.errors?.['required']) {
+            @if ((flightForm.controls.flightId.touched || submitted) && flightForm.controls.flightId.errors?.['required']) {
             <span>Select flight!</span>
             }
         </div>
@@ -19,7 +19,7 @@
         <label for="customerName">name</label>
         <input type="text" name="customerName" id="customerName" formControlName="customerName">
         <div class="errMessage">
-            @if (flightForm.controls.customerName.touched && flightForm.controls.customerName.errors?.['required']) {
+            @if ((flightForm.controls.customerName.touched || submitted) && flightForm.controls.customerName.errors?.['required']) {
             <span>Field required!</span>
             }
             @if (flightForm.controls.customerName.touched && flightForm.controls.customerName.errors?.['minlength']) {
@@ -36,7 +36,7 @@
             @if (flightForm.controls.travelers.touched && flightForm.controls.travelers.errors?.['min']) {
             <span>Field requires minimum 1 traveler.</span>
             }
-            @if (flightForm.controls.travelers.touched && flightForm.controls.travelers.errors?.['required']) {
+            @if ((flightForm.controls.travelers.touched || submitted) && flightForm.controls.travelers.errors?.['required']) {
             <span>Field required!</span>
             }
         </div>
@@ -46,7 +46,7 @@
         <label for="departureDate">flight date to destination</label>
         <input type="date" name="departureDate" id="departureDate" formControlName="departureDate">
         <div class="errMessage">
-            @if (flightForm.controls.departureDate.touched && flightForm.controls.departureDate.errors?.['required']) {
+            @if ((flightForm.controls.departureDate.touched || submitted) && flightForm.controls.departureDate.errors?.['required']) {
             <span class="errMessage">Field required!</span>
             }
             @if ( flightForm.controls.departureDate.touched && flightForm.controls.departureDate.errors?.['pastDate']) {
@@ -60,7 +60,7 @@
         <label for="returnDate">flight date from destination</label>
         <input type="date" name="returnDate" id="returnDate" formControlName="returnDate">
         <div class="errMessage">
-            @if (flightForm.controls.returnDate.touched && flightForm.controls.returnDate.errors?.['required']) {
+            @if ((flightForm.controls.returnDate.touched || submitted) && flightForm.controls.returnDate.errors?.['required']) {
             <span class="errMessage">Field required!</span>
             }
             @if (flightForm.hasError('pastReturnDate')) {
