@@ -1,441 +1,239 @@
-# Travel-booking app design
+# Travel Booking ✈️
 
-1. 🔍 Business Analysis
+A small Angular application for booking a flight and hotel through a multi-step form.
 
-> Analýza nám hovorí, **čo sa má diať**.
+The user selects a route, chooses a flight, enters travel details, selects a hotel and finally gets a summary of the booking with the total price.
 
-```
-1. Používateľ vyberie krajinu odletu a cieľovú krajinu.
+## How the app works
 
-2. Aplikácia mu zobrazí dostupné lety pre zvolenú trasu.
-
-3. Používateľ vyberie let a zadá potrebné údaje o cestujúcom a ceste.
-
-4. Aplikácia mu zobrazí hotely dostupné v cieľovej krajine.
-
-5. Používateľ vyberie hotel a zadá kontaktné údaje
-   a informácie o pobyte.
-
-6. Aplikácia skontroluje, či sú zadané údaje platné
-   a vypočíta cenu rezervácie.
-
-7. Používateľ dostane súhrn celej rezervácie.
-```
-
-## 2. 🧭 User flow
-
-> Akými obrazovkami a krokmi používateľ prejde?
-
-```
-START
-   ↓
+```text
 Home
-
-APP:
-- zobrazí formulár (From, To)
-
-USER:
-- vyberie krajiny
-
-Submit
-   ↓
-Valid?
-├── NO
-│
-│   APP:
-│   - zobrazí validačné chyby
-│   - zostane na Home
-│
-└── YES
-    │
-    APP:
-    - update BookingDetails
-    - navigate na Flight Booking
-```
-
-```
+  ↓
 Flight Booking
-
-APP:
-- načíta dostupné lety
-- zobrazí formulár
-
-USER:
-- vyberie let
-- zadá meno
-- počet cestujúcich
-- dátumy
-
-Submit
-   ↓
-Valid?
-├── NO
-│
-│   APP:
-│   - zobrazí chyby
-│
-└── YES
-    │
-    APP:
-    - update BookingDetails
-    - navigate na Hotel Booking
-```
-
-```
+  ↓
 Hotel Booking
-
-APP:
-- načíta hotely
-- zobrazí formulár
-
-USER:
-- vyberie hotel
-- email
-- telefón
-- izby
-
-Submit
-   ↓
-Valid?
-├── NO
-│
-│   APP:
-│   - zobrazí chyby
-│
-└── YES
-    │
-    APP:
-    - update BookingDetails
-    - navigate na Summary
-```
-
-```
+  ↓
 Summary
-
-APP:
-- načíta BookingDetails
-- zobrazí celú rezerváciu
 ```
 
-##### Service flows
+### Home
 
+The user selects the departure and destination countries.
+
+This part uses a Template-Driven Form.
+
+I added a custom cross-field validator so the departure and destination countries cannot be the same.
+
+### Flight Booking
+
+The application loads flights based on the selected route.
+
+The user chooses a flight and enters:
+
+- name
+- number of travelers
+- departure date
+- return date
+
+This part uses Reactive Forms.
+
+Validation checks required fields, minimum values, dates in the past and whether the return date is after the departure date.
+
+### Hotel Booking
+
+Hotels are loaded based on the destination country.
+
+The user selects a hotel and enters:
+
+- email
+- phone number
+- number of rooms
+
+The number of rooms is validated dynamically based on the availability of the selected hotel.
+
+### Summary
+
+The final page shows the booking details and calculates the total price.
+
+The price is calculated from:
+
+```text
+flight price × travelers
++
+hotel price × rooms × number of nights
 ```
+
+---
+
+## Angular concepts used
+
+- Template-Driven Forms
+- Reactive Forms
+- FormBuilder
+- Built-in validators
+- Custom validators
+- Cross-field validation
+- Dynamic validators
+- `markAllAsTouched()`
+- Angular Router
+- Services
+- TypeScript interfaces
+- `Partial<BookingDetails>`
+- `filter()` and `find()`
+- CurrencyPipe
+- NgOptimizedImage
+
+---
+
+## Application design
+
+Before writing the components, I first planned the main user flow, data models, services and routes.
+
+The application is split into four main steps:
+
+```text
 HomeComponent
-      │
-      └── updateTravelSelection(...)
-               ↓
-        BookingService
-               ↓
-        TravelSelection
+      ↓
+FlightBooking
+      ↓
+HotelBooking
+      ↓
+Summary
 ```
 
-```
-FlightBookingComponent
-      │
-      ├── getTravelSelection()
-      │        ↓
-      │   fromCountry, toCountry
-      │
-      ├── getFlights(fromCountry, toCountry)
-      │        ↓
-      │   availableFlights
-      │
-      └── updateBookingDetails(...)
-               ↓
-         BookingDetails
+The components share booking data through `BookingService`.
+
+### Main data models
+
+```ts
+Flight
+Hotel
+BookingDetails
+TravelSelection
 ```
 
-```
-HotelBookingComponent
-      │
-      ├── getBookingDetails()
-      │        ↓
-      │     toCountry
-      │
-      ├── getHotels(toCountry)
-      │        ↓
-      │   availableHotels
-      │
-      └── updateBookingDetails(...)
-               ↓
-         BookingDetails
-```
+`TravelSelection` keeps the departure and destination selected on the Home page.
 
-```
-SummaryComponent
-      │
-      └── getBookingDetails()
-               ↓
-         BookingDetails
-               ↓
-        zobrazenie rezervácie
+`BookingDetails` is built gradually while the user moves through the booking process.
+
+```text
+Flight Booking
+    ↓
+adds flight and traveler data
+
+Hotel Booking
+    ↓
+adds hotel and contact data
+
+Summary
+    ↓
+adds totalCost
 ```
 
-## 3. 📦 Data Models
+---
 
-#### Flight
+## State management
 
-```typescript
-export interface Flight {
-  id: string;
-  details: string;
-  price: number;
-  fromCountry: string;
-  toCountry: string;
+The project uses `BookingService` to keep the current booking state between routes.
+
+The service is responsible for:
+
+- storing flights and hotels
+- returning available countries
+- filtering flights by route
+- filtering hotels by destination
+- storing the selected travel route
+- updating `BookingDetails`
+
+Example:
+
+```ts
+updateBookingDetails(details: Partial<BookingDetails>): void {
+  this.bookingDetails = {
+    ...this.bookingDetails,
+    ...details
+  };
 }
 ```
 
-#### Hotel
+This allows each step of the booking process to update only the part of the reservation that it knows about.
 
-```typescript
-export interface Hotel {
-  id: string;
-  name: string;
-  country: string;
-  price: number;
-  roomsAvailable: number;
-}
+---
+
+## Validation
+
+I spent quite a lot of time on validation in this project because I wanted the forms to behave properly, not only check whether a field was empty.
+
+Some of the validation rules are:
+
+- departure and destination countries cannot be the same
+- required fields must be completed
+- customer name must contain at least 3 characters
+- number of travelers must be at least 1
+- travel dates cannot be in the past
+- return date must be after the departure date
+- email must have a valid format
+- phone number must contain 9 to 15 digits
+- number of rooms cannot exceed the availability of the selected hotel
+
+The hotel form also updates the maximum room validator after the user selects a hotel.
+
+---
+
+## Routing
+
+```text
+/                   → redirect to /home
+/home               → HomeComponent
+/flight-booking     → FlightBooking
+/hotel-booking      → HotelBooking
+/summary            → Summary
+/**                 → PageNotFound
 ```
 
-#### BookingDetails
+The application does not currently use route parameters, query parameters, child routes or guards.
 
-```typescript
-export interface BookingDetails {
-    flight?: Flight;
-    hotel?: Hotel;
+---
 
-    customerName?: string; // customerName: string | undefined;
-    email?: string; // "Táto property nemusí existovať."
-    phone?: string;
+## Project background
 
-    departureDate?: string;
-    arrivalDate?: string;
+This project originally started as a Codecademy Angular Forms exercise.
 
-    travelers?: number;
+After finishing the original exercise, I rebuilt the project in VS Code and continued working on it independently.
 
-    rooms?: number;
+During the rebuild I changed and added several things:
 
-    totalCost?: number;
-}
+- used both Template-Driven and Reactive Forms
+- added custom cross-field validation
+- added dynamic room validation based on hotel availability
+- used FormBuilder in the hotel form
+- added service-based booking state
+- added routing and a 404 page
+- used CurrencyPipe and NgOptimizedImage
+- added the final price calculation
+- expanded the original flight and hotel data
+- improved the validation feedback and booking UI
+
+The project became a good way for me to practice how different Angular concepts work together in one application instead of using them only in separate exercises.
+
+---
+
+## Running the project
+
+Install dependencies:
+
+```bash
+npm install
 ```
 
-## **4. ⚙️ Services & State Management**
+Start the development server:
 
-#### booking.service.ts
-
-```
-Zodpovednosť
-- spravuje stav rezervácie
-
-Dáta
-- Flight[] ✓
-- Hotel[] ✓
-- bookingDetails: BookingDetails ✓
-
-Metódy
-- getCountries() ✓
-- getFlights() ✓
-- getHotels() ✓
-- updateBookingDetails() ✓
-- getBookingDetails() ✓
-- clearBookingDetails() ✓
-
-Používajú
-- HomeComponent
-- FlightBookingComponent
-- HotelBookingComponent
-- SummaryComponent
+```bash
+ng serve
 ```
 
-#### log-error.service.ts
+Open:
 
-```
-Zodpovednosť
-- spravuje chyby z formulárov
-
-Dáta
-- errors: string[]
-
-Metódy
-- addError()
-- getErrors()
-- clearErrors()
-
-Používajú
-- FlightBookingComponent
-- HotelBookingComponent
-
-```
-
-## 5. 🧩 Components
-
-#### HomeComponent
-
-```
-Zodpovednosť
-- začiatok rezervácie
-- výber krajiny odletu a destinácie
-- validácia úvodného formulára
-- uloženie fromCountry a toCountry do rezervácie
-
-Dáta
-- countries: string[]
-- travelModel (fromCountry, toCountry)
-
-Metódy
-- ngOnInit()
-- onSubmit() / startBooking()
-- isFieldInvalid()
-
-Services
-
-BookingService
-- getCountries()
-- updateBookingDetails()
-
-Naviguje na
-- FlightBookingComponent
-```
-
-#### FlightBookingComponent
-
-```
-Zodpovednosť
-- zobraziť dostupné lety podľa fromCountry a toCountry z rezervácie
-- umožniť výber letu, mena, počtu cestujúcich a dátumov
-- zobraziť chyby pri validácii formulára
-
-Dáta
-- availableFlights: Flight[]
-- flightForm / údaje z formulára
-
-Metódy
-- ngOnInit()
-- onSubmit()
-- handleErrors()
-
-Services
-
-BookingService
-- getTravelSelection()
-- getFlights(fromCountry, toCountry)
-- updateBookingDetails()
-
-LogErrorService
-- addError()
-- getErrors()
-- clearErrors()
-
-Naviguje na
-- HotelBookingComponent
-```
-
-#### HotelBookingComponent
-
-Zodpovednosť
-- zobraziť dostupné hotely podľa cieľovej krajiny
-- načítať existujúce BookingDetails
-- umožniť výber hotela
-- získať email, telefón a počet izieb
-- validovať hotelový formulár
-- vypočítať hotelovú časť ceny
-- doplniť BookingDetails
-- navigovať na SummaryComponent
-
-Dáta
-- availableHotels: Hotel[]
-- bookingDetails: BookingDetails
-- hotelForm / údaje z formulára
-
-Metódy
-- ngOnInit()
-- onSubmit()
-- handleErrors()
-
-Services
-
-BookingService
-- getBookingDetails()
-- getHotels(toCountry)
-- updateBookingDetails()
-
-LogErrorService
-- addError()
-- getErrors()
-- clearErrors()
-
-Naviguje na
-- SummaryComponent
-
-#### SummaryComponent
-
-```
-Zodpovednosť
-- zobraziť celú rezerváciu
-
-Dáta
-- bookingDetails: BookingDetails
-
-Metódy
-- ngOnInit()
-
-Services
-
-BookingService
-- getBookingDetails()
-
-```
-
-## 6. 🛣️ Routing
-
-```
-Default route
-- path: ''
-- redirectTo: 'home'
-- pathMatch: 'full'
-
-Main routes
-- Route 1
-  path: home
-  component: HomeComponent
-  prichádza z: štart aplikácie
-  pokračuje na: flight-booking
-
-- Route 2
-  path: flight-booking
-  component: FlightBookingComponent
-  prichádza z: home
-  pokračuje na: hotel-booking
-
-- Route 3
-  path: hotel-booking
-  component: HotelBookingComponent
-  prichádza z: flight-booking
-  pokračuje na: summary
-
-- Route 4
-  path: summary
-  component: SummaryComponent
-  prichádza z: hotel-booking
-  pokračuje na: nikde
-
-Navigation flow
-
-home
-↓
-flight-booking
-↓
-hotel-booking
-↓
-summary
-
-Fallback route
-- path: '**'
-- redirectTo: 'home'
-
-Optional
-- route params? : no
-- query params? : no
-- child routes? : no
-- guards? : no
+```text
+http://localhost:4200
 ```
