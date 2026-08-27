@@ -91,17 +91,7 @@ Before writing the components, I first planned the main user flow, data models, 
 
 The application is split into four main steps:
 
-```text
-HomeComponent
-      ↓
-FlightBooking
-      ↓
-HotelBooking
-      ↓
-Summary
-```
-
-The components share booking data through `BookingService`.
+![Travel Booking application design](docs/travel-booking-design.png)
 
 ### Main data models
 
