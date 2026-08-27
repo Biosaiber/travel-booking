@@ -28,8 +28,7 @@ export class HomeComponent implements OnInit {
 
   onSubmit(form: NgForm) {
 
-    if (form.valid && (this.travelFormModel.fromCountry !== this.travelFormModel.toCountry)) {
-
+    if (form.valid) {
       this.bookingService.updateTravelSelection(this.travelFormModel);
       this.router.navigate(['/flight-booking']);
     }

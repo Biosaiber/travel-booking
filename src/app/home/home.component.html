@@ -7,8 +7,8 @@
             [class.valid]="flightFrom.touched && flightFrom.valid && !travelForm.hasError('sameCountry')"
             #flightFrom="ngModel" required>
             <option value="" disabled>Select departure country</option>
-            @for (country of this.countries; track country) {
-            <option value="{{country}}">{{country}}</option>
+            @for (country of countries; track country) {
+            <option [value]="country">{{country}}</option>
             }
         </select>
         <div class="errMessage">
@@ -26,8 +26,8 @@
             [class.valid]="flightTo.touched && flightTo.valid && !travelForm.hasError('sameCountry')"
             #flightTo="ngModel" required>
             <option value="" disabled>Select arrival country</option>
-            @for (country of this.countries; track country) {
-            <option value="{{country}}">{{country}}</option>
+            @for (country of countries; track country) {
+            <option [value]="country">{{country}}</option>
             }
 
         </select>
