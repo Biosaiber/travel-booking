@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { BookingService } from '../booking.service';
-import { TravelSelection } from '../booking.service';
+import { BookingService, TravelSelection } from '../booking.service';
 import { Flight } from '../models/flight.interface';
 import { ReactiveFormsModule, AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookingDetails } from '../models/booking.interface';
@@ -19,7 +18,6 @@ export class FlightBooking implements OnInit {
   router = inject(Router);
   journey!: TravelSelection;
   availableFlights!: Flight[];
-  submitted = false;
   flightForm = new FormGroup({
     flightId: new FormControl("", [Validators.required]),
     customerName: new FormControl("", { nonNullable: true, validators: [Validators.required, Validators.minLength(3)] }),
@@ -39,9 +37,8 @@ export class FlightBooking implements OnInit {
 
     if (conValue < today) {
       return { pastDate: true }
-    } else {
-      return null
     }
+    return null
   }
   dateOrderValidator(control: AbstractControl) {
     const departureDate = control.get('departureDate')?.value;
@@ -67,32 +64,29 @@ export class FlightBooking implements OnInit {
 
   }
   onSubmit() {
-    this.submitted = true;
-    if (this.flightForm.valid) {
-
-      const flightFormSave = this.flightForm.value;
-
-
-
-
-      //by id take all data
-      const chosenFlight = this.availableFlights.find(flight => flight.id === flightFormSave.flightId);
-      if (!chosenFlight) {
-        return
-      }
-
-      const flightDetails: Partial<BookingDetails> = {
-        flight: chosenFlight,
-        customerName: flightFormSave.customerName,
-        departureDate: flightFormSave.departureDate,
-        returnDate: flightFormSave.returnDate,
-        travelers: Number(flightFormSave.travelers)
-      }
-      this.bookingService.updateBookingDetails(flightDetails);
-
-      this.router.navigate(['/hotel-booking']);
-
-
+    if (this.flightForm.invalid) {
+      this.flightForm.markAllAsTouched();
+      return;
     }
+
+    const flightFormSave = this.flightForm.value;
+    const chosenFlight = this.availableFlights.find(flight => flight.id === flightFormSave.flightId);
+    if (!chosenFlight) {
+      return;
+    }
+
+    const flightDetails: Partial<BookingDetails> = {
+      flight: chosenFlight,
+      customerName: flightFormSave.customerName,
+      departureDate: flightFormSave.departureDate,
+      returnDate: flightFormSave.returnDate,
+      travelers: Number(flightFormSave.travelers)
+    }
+    this.bookingService.updateBookingDetails(flightDetails);
+
+    this.router.navigate(['/hotel-booking']);
+
+
+
   }
 }

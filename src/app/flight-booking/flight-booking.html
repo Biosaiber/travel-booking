@@ -2,15 +2,14 @@
     <div class="input-box">
         <select name="availableFlights" id="availableFlights" formControlName="flightId">
             <option value="" disabled>Select flight</option>
-            @for (avFlight of this.availableFlights; track avFlight.id) {
-            <option value="{{avFlight.id}}">{{avFlight.departureTime}}, {{avFlight.airline}}, {{avFlight.travelClass}},
+            @for (avFlight of availableFlights; track avFlight.id) {
+            <option [value]="avFlight.id">{{avFlight.departureTime}}, {{avFlight.airline}}, {{avFlight.travelClass}},
                 {{avFlight.price | currency: 'EUR' }}</option>
             }
 
         </select>
         <div class="errMessage">
-            @if ((flightForm.controls.flightId.touched || submitted) &&
-            flightForm.controls.flightId.errors?.['required']) {
+            @if (flightForm.controls.flightId.touched && flightForm.controls.flightId.errors?.['required']) {
             <span>Select flight!</span>
             }
         </div>
@@ -20,8 +19,7 @@
         <label for="customerName">name</label>
         <input type="text" name="customerName" id="customerName" formControlName="customerName">
         <div class="errMessage">
-            @if ((flightForm.controls.customerName.touched || submitted) &&
-            flightForm.controls.customerName.errors?.['required']) {
+            @if (flightForm.controls.customerName.touched && flightForm.controls.customerName.errors?.['required']) {
             <span>Field required!</span>
             }
             @if (flightForm.controls.customerName.touched && flightForm.controls.customerName.errors?.['minlength']) {
@@ -38,8 +36,7 @@
             @if (flightForm.controls.travelers.touched && flightForm.controls.travelers.errors?.['min']) {
             <span>Field requires minimum 1 traveler.</span>
             }
-            @if ((flightForm.controls.travelers.touched || submitted) &&
-            flightForm.controls.travelers.errors?.['required']) {
+            @if (flightForm.controls.travelers.touched && flightForm.controls.travelers.errors?.['required']) {
             <span>Field required!</span>
             }
         </div>
@@ -49,11 +46,10 @@
         <label for="departureDate">flight date to destination</label>
         <input type="date" name="departureDate" id="departureDate" formControlName="departureDate" [class.valid-date]="flightForm.controls.departureDate.touched && flightForm.controls.departureDate.valid">
         <div class="errMessage">
-            @if ((flightForm.controls.departureDate.touched || submitted) &&
-            flightForm.controls.departureDate.errors?.['required']) {
+            @if (flightForm.controls.departureDate.touched && flightForm.controls.departureDate.errors?.['required']) {
             <span>Field required!</span>
             }
-            @if ( flightForm.controls.departureDate.touched && flightForm.controls.departureDate.errors?.['pastDate']) {
+            @if (flightForm.controls.departureDate.touched && flightForm.controls.departureDate.errors?.['pastDate']) {
             <span>Date cannot be in the past.</span>
             }
         </div>
@@ -65,14 +61,13 @@
         <input type="date" name="returnDate" id="returnDate" formControlName="returnDate"
             [class.valid-date]="flightForm.controls.returnDate.touched && flightForm.controls.returnDate.valid && !flightForm.hasError('pastReturnDate')">
         <div class="errMessage">
-            @if ((flightForm.controls.returnDate.touched || submitted) &&
-            flightForm.controls.returnDate.errors?.['required']) {
+            @if (flightForm.controls.returnDate.touched && flightForm.controls.returnDate.errors?.['required']) {
             <span>Field required!</span>
             }
             @if (flightForm.hasError('pastReturnDate')) {
             <span>Return date cannot be before departure date.</span>
             }
-            @if ( flightForm.controls.returnDate.touched && flightForm.controls.returnDate.errors?.['pastDate']) {
+            @if (flightForm.controls.returnDate.touched && flightForm.controls.returnDate.errors?.['pastDate']) {
             <span>Date cannot be in the past.</span>
             }
         </div>
