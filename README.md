@@ -91,7 +91,7 @@ Before writing the components, I first planned the main user flow, data models, 
 
 The application is split into four main steps:
 
-![Travel Booking application design](docs/travel-booking-design.png)
+![Travel Booking application design](docs/travel-booking-architecture.png)
 
 ### Main data models
 
