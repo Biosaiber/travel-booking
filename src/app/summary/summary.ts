@@ -22,7 +22,7 @@ export class Summary implements OnInit {
     const departureDate: Date = new Date(this.summaryDetails.departureDate);
     const returnDate: Date = new Date(this.summaryDetails.returnDate);
     const travelPeriod: number = Number(returnDate) - Number(departureDate);
-    const days: number = travelPeriod / 1000 / 60 / 60 / 24;
+    const days: number = travelPeriod / (1000 * 60 * 60 * 24);
 
     if (!this.summaryDetails.flight?.price || !this.summaryDetails.travelers || !this.summaryDetails.hotel?.price || !this.summaryDetails.rooms) {
       return;

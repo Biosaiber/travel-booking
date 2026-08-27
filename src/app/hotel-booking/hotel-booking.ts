@@ -19,7 +19,6 @@ export class HotelBooking implements OnInit {
   savedFlightDestination!: string;
   selectedHotelId!: string;
   selectedHotel: Hotel | undefined;
-  submitted = false;
   bookingService = inject(BookingService);
   router = inject(Router);
   private formBuilder = inject(FormBuilder);
@@ -46,9 +45,6 @@ export class HotelBooking implements OnInit {
 
     this.hotelForm.controls.hotelId.valueChanges.subscribe(value => {
 
-      if (value === null) {
-        return;
-      }
       this.selectedHotelId = value;
 
       const hotel = this.availableHotels.find(hotel => this.selectedHotelId === hotel.id);
@@ -60,7 +56,7 @@ export class HotelBooking implements OnInit {
       this.hotelForm.controls.rooms.setValidators([
         Validators.required,
         Validators.min(1),
-        Validators.max(this.selectedHotel.roomsAvailable)
+        Validators.max(hotel.roomsAvailable)
       ]);
 
       this.hotelForm.controls.rooms.updateValueAndValidity();
@@ -69,28 +65,28 @@ export class HotelBooking implements OnInit {
     })
   }
   onSubmit() {
-    this.submitted = true;
-    if (this.hotelForm.valid) {
-
-
-      const hotelFormSave = this.hotelForm.getRawValue()
-      console.log(hotelFormSave);
-
-      const chosenHotel = this.availableHotels.find(hotel => hotel.id === hotelFormSave.hotelId);
-
-      if (!chosenHotel) {
-        return;
-      }
-      const hotelDetails: Partial<BookingDetails> = {
-        hotel: chosenHotel,
-        email: hotelFormSave.email,
-        phone: hotelFormSave.phone,
-        rooms: Number(hotelFormSave.rooms)
-      }
-
-      this.bookingService.updateBookingDetails(hotelDetails);
-
-      this.router.navigate(['/summary']);
+    if (this.hotelForm.invalid) {
+      this.hotelForm.markAllAsTouched();
+      return;
     }
+
+    const hotelFormSave = this.hotelForm.getRawValue();
+
+    const chosenHotel = this.availableHotels.find(hotel => hotel.id === hotelFormSave.hotelId);
+
+    if (!chosenHotel) {
+      return;
+    }
+    const hotelDetails: Partial<BookingDetails> = {
+      hotel: chosenHotel,
+      email: hotelFormSave.email,
+      phone: hotelFormSave.phone,
+      rooms: Number(hotelFormSave.rooms)
+    };
+
+    this.bookingService.updateBookingDetails(hotelDetails);
+
+    this.router.navigate(['/summary']);
+
   }
 }

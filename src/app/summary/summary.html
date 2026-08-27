@@ -20,9 +20,9 @@
     <li>{{summaryDetails?.travelers}}
 
         @if (summaryDetails?.travelers === 1 ) {
-        travaler
+        traveler
         } @else {
-        travalers
+        travelers
         }
     </li>
 </ul>
@@ -30,7 +30,7 @@
 <ul>
     <li>{{summaryDetails?.hotel?.name}} {{summaryDetails?.hotel?.stars}}</li>
     <li>{{summaryDetails?.hotel?.address}}</li>
-    <li>{{summaryDetails?.hotel?.price | currency: 'EUR' }} / travaler</li>
+    <li>{{summaryDetails?.hotel?.price | currency: 'EUR' }} / room</li>
     <li>{{summaryDetails?.rooms}}
         @if (summaryDetails?.rooms === 1) {
         room
